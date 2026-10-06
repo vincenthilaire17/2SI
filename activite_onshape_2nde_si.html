@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activité CAO Onshape - Seconde SI (3h)</title>
+    <style>
+        :root {
+            --primary: #1a56db;
+            --primary-dark: #1e429f;
+            --primary-light: #ebf5ff;
+            --secondary: #0e9f6e;
+            --secondary-light: #def7ec;
+            --accent: #d97706;
+            --accent-light: #fef3c7;
+            --danger: #dc2626;
+            --text-main: #1f2937;
+            --text-muted: #64748b;
+            --bg-page: #f1f5f9;
+            --bg-card: #ffffff;
+            --border: #cbd5e1;
+            --border-tech: #94a3b8;
+            --font-sans: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            --font-mono: 'Consolas', 'Courier New', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 70px;
+        }
+
+        /* En-tête */
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #2563eb 100%);
+            color: white;
+            padding: 28px 20px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-title h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-title p {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.16);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge-time {
+            background: #fbbf24;
+            color: #78350f;
+            border-color: #f59e0b;
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 1240px;
+            margin: 25px auto;
+            padding: 0 20px;
+        }
+
+        /* Barre d'outils */
+        .action-bar {
+            background: white;
+            padding: 14px 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+
+        .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .progress-bar-wrap {
+            width: 180px;
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--secondary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--text-main);
+            border: 1px solid var(--border-tech);
+        }
+        .btn-outline:hover {
+            background: #f8fafc;
+        }
+
+        /* Cartes de sections */
+        .card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            padding: 26px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 14px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-time-tag {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        /* Cartes de tutoriel officiel */
+        .tuto-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 22px;
+            margin-top: 15px;
+        }
+
+        .tuto-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 22px;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .tuto-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+        }
+
+        .tuto-step-number {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--primary);
+            color: white;
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 3px 12px;
+            border-radius: 12px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .tuto-content h3 {
+            font-size: 1.18rem;
+            margin-top: 6px;
+            margin-bottom: 10px;
+            color: #0f172a;
+        }
+
+        .tuto-content p {
+            font-size: 0.92rem;
+            color: #475569;
+            margin-bottom: 14px;
+        }
+
+        .tuto-bullets {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .tuto-bullets li {
+            font-size: 0.88rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #2563eb;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-align: center;
+            transition: background 0.2s;
+        }
+
+        .link-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* Bloc Règle d'or */
+        .golden-rule {
+            background: #eff6ff;
+            border-left: 5px solid var(--primary);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .golden-rule-icon {
+            color: var(--primary);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .golden-rule h4 {
+            color: #1e3a8a;
+            font-size: 1rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .golden-rule p {
+            font-size: 0.9rem;
+            color: #1e293b;
+        }
+
+        .assembly-callout {
+            background: #f0fdf4;
+            border-left: 5px solid #16a34a;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 16px 0 20px 0;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .assembly-callout-icon {
+            color: #16a34a;
+            flex-shrink: 0;
+        }
+
+        .assembly-callout p {
+            font-size: 0.88rem;
+            color: #14532d;
+            margin: 0;
+        }
+
+        /* Boîtes des pièces */
+        .piece-box {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 35px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .piece-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 18px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 12px;
+        }
+
+        .piece-header h3 {
+            font-size: 1.25rem;
+            color: #1e3a8a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .piece-num-badge {
+            background: #1e40af;
+            color: white;
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 0.92rem;
+            font-weight: 800;
+        }
+
+        .piece-level {
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
+
+        .level-1 { background: #dcfce7; color: #166534; }
+        .level-2 { background: #e0f2fe; color: #075985; }
+        .level-3 { background: #fef3c7; color: #92400e; }
+        .level-pro { background: #f3e8ff; color: #6b21a8; }
+
+        /* Conteneurs des plans et esquisses cotées (1 seule vue centrée) */
+        .sketch-view-container {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .view-panel {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: auto;
+            width: 100%;
+            max-width: 680px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .view-panel-full {
+            max-width: 860px;
+        }
+
+        .view-panel-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            border-bottom: 1px dashed #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .view-panel-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .view-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            color: #475569;
+        }
+
+        .view-panel svg {
+            width: 100%;
+            max-width: 560px;
+            height: auto;
+            display: block;
+        }
+
+        /* Conteneur d'image de plan technique */
+        .plan-img-wrapper {
+            width: 100%;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .plan-img {
+            max-width: 100%;
+            height: auto;
+            max-height: 480px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            cursor: zoom-in;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .plan-img:hover {
+            transform: scale(1.01);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+
+        .zoom-hint {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            background: rgba(15, 23, 42, 0.8);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 6px;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Grille des instructions et autocontrôle */
+        .instructions-grid {
+            display: grid;
+            grid-template-columns: 1.75fr 1.25fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 860px) {
+            .instructions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .steps-list {
+            padding-left: 20px;
+            font-size: 0.92rem;
+            color: #334155;
+        }
+
+        .steps-list li {
+            margin-bottom: 8px;
+        }
+
+        .verification-panel {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 18px;
+            border: 1px solid var(--border);
+        }
+
+        .verification-panel h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .v-data {
+            font-size: 0.88rem;
+            margin-bottom: 12px;
+            line-height: 1.55;
+        }
+
+        .v-data code {
+            font-family: var(--font-mono);
+            background: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .check-input-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .check-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #94a3b8;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-family: var(--font-mono);
+        }
+
+        .btn-check {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-check:hover {
+            background: #059669;
+        }
+
+        .feedback-msg {
+            font-size: 0.85rem;
+            margin-top: 8px;
+            font-weight: 600;
+            min-height: 22px;
+        }
+
+        /* Grille d'évaluation */
+        .eval-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        .eval-table th, .eval-table td {
+            border: 1px solid #cbd5e1;
+            padding: 10px 14px;
+            text-align: left;
+        }
+
+        .eval-table th {
+            background: #f1f5f9;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .checkbox-cell {
+            text-align: center;
+            width: 70px;
+        }
+
+        .checkbox-cell input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        /* Modal / Visionneuse plein écran pour les plans */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.85);
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            max-width: 95vw;
+            max-height: 94vh;
+            position: relative;
+            background: white;
+            padding: 14px;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .modal-box img {
+            max-width: 100%;
+            max-height: 84vh;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -14px;
+            right: -14px;
+            background: #dc2626;
+            color: white;
+            border: 2px solid white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+                padding-bottom: 0;
+            }
+            .action-bar, .btn, .check-input-group, .feedback-msg, .zoom-hint, .modal-overlay {
+                display: none !important;
+            }
+            header {
+                background: none;
+                color: black;
+                border-bottom: 2px solid #000;
+                padding: 10px 0;
+            }
+            .badge {
+                border: 1px solid #000;
+                color: #000;
+                background: none;
+            }
+            .card, .piece-box {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+                margin-bottom: 20px;
+            }
+            .sketch-view-container {
+                display: block;
+            }
+            .view-panel {
+                max-width: 100%;
+                border: 1px solid #aaa;
+            }
+            a {
+                text-decoration: underline;
+                color: black;
+            }
+            .link-btn {
+                background: none;
+                color: #000;
+                border: 1px solid #000;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- En-tête -->
+    <header>
+        <div class="header-container">
+            <div class="header-title">
+                <h1>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                    TP CAO 3D Onshape : Esquisse Avancée, Révolution & Mécanismes
+                </h1>
+                <p>Enseignement d'exploration Seconde Sciences de l'Ingénieur (SI & CIT) — Conception volumique 3D & Lecture de plans</p>
+            </div>
+            <div class="badges">
+                <span class="badge badge-time">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+                    Durée de la séance : 3h00
+                </span>
+                <span class="badge">Niveau : 2nde SI</span>
+                <span class="badge">5 Pièces d'application + 2 Tutoriels</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Barre d'outils -->
+        <div class="action-bar">
+            <div class="progress-indicator">
+                <span>Progression TP :</span>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar-fill" id="global-progress"></div>
+                </div>
+                <span id="progress-percent">0%</span>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-outline" onclick="window.print()">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                    Imprimer / PDF
+                </button>
+                <a href="#evaluation" class="btn btn-primary">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Grille d'évaluation (20 pts)
+                </a>
+            </div>
+        </div>
+
+        <!-- Règle d'or de conception -->
+        <div class="golden-rule">
+            <div class="golden-rule-icon">
+                <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            </div>
+            <div>
+                <h4>Règle d'or Onshape pour la fonction Révolution (Revolve) :</h4>
+                <p>
+                    Pour générer une pièce de révolution, <strong>on ne dessine JAMAIS la pièce complète</strong> dans l'esquisse ! <br>
+                    On trace <strong>UNIQUEMENT le demi-profil fermé situé d'un seul côté par rapport à l'axe de construction</strong> (au-dessus de l'axe). Pour coter un diamètre, cliquez sur le segment, puis sur l'axe, et positionnez la cote sous l'axe (Onshape applique automatiquement le symbole diamètre <code>⌀</code>).
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 1 : Tutoriels officiels Onshape -->
+        <section class="card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                    1. Exercices guidés officiels (Onshape Learning Center)
+                </h2>
+                <span class="card-time-tag">~ 45 min (2 x ~22 min)</span>
+            </div>
+
+            <p style="margin-bottom: 20px; color: #475569;">
+                Dans votre document Onshape (nommé <code>TP_CAO_2SI_NOM_PRENOM</code>), réalisez les deux tutoriels officiels en suivant les étapes pas-à-pas pour maîtriser les fondations de l'esquisse et de la révolution :
+            </p>
+
+            <div class="tuto-grid">
+                <!-- Module 1 -->
+                <div class="tuto-card">
+                    <span class="tuto-step-number">Activité 1 • ~20 min</span>
+                    <div class="tuto-content">
+                        <h3>Intermediate Sketching</h3>
+                        <p>Maîtrisez les relations géométriques avancées, les lignes de construction, les arcs tangents et la symétrie.</p>
+                        <ul class="tuto-bullets">
+                            <li><strong>Lignes de construction :</strong> Créer des repères d'axe (raccourci <code>Q</code>).</li>
+                            <li><strong>Tangence :</strong> Raccorder des arcs et droites sans cassure (raccourci <code>T</code>).</li>
+                            <li><strong>Miroir & Ajuster :</strong> Dupliquer par symétrie et découper avec <em>Trim</em> (<code>M</code>).</li>
+                            <li><strong>Esquisse totalement contrainte :</strong> Toutes les entités doivent impérativement devenir <strong>noires</strong>.</li>
+                        </ul>
+                    </div>
+                    <a href="https://learn.onshape.com/learn/course/fundamentals-sketching/sketch-tools/exercise-intermediate-sketching?page=2" target="_blank" rel="noopener noreferrer" class="link-btn">
+                        <span>Ouvrir "Intermediate Sketching"</span>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    </a>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="tuto-card">
+                    <span class="tuto-step-number">Activité 2 • ~25 min</span>
+                    <div class="tuto-content">
+                        <h3>Exercise: Revolve</h3>
+                        <p>Apprenez à générer des solides cylindriques et toriques en faisant tourner un profil fermé autour d'un axe.</p>
+                        <ul class="tuto-bullets">
+                            <li><strong>Axe de révolution :</strong> Définir une ligne de construction pour l'axe de rotation.</li>
+                            <li><strong>Demi-profil d'un seul côté :</strong> Dessiner la section fermée strictement au-dessus de l'axe.</li>
+                            <li><strong>Cotation au diamètre (⌀) :</strong> Clic entité → clic axe → placer la cote de l'autre côté de l'axe.</li>
+                            <li><strong>Fonction Revolve :</strong> Sélectionner la région fermée et l'axe pour une révolution à 360°.</li>
+                        </ul>
+                    </div>
+                    <a href="https://learn.onshape.com/learn/course/fundamentals-part-design-using-part-studios/creating-basic-part-features/exercise-revolve?page=2" target="_blank" rel="noopener noreferrer" class="link-btn">
+                        <span>Ouvrir "Exercise: Revolve"</span>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2 : Pièces d'application autonome -->
+        <section class="card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    2. Pièces d'application autonome : Plans techniques & Modélisation
+                </h2>
+                <span class="card-time-tag">~ 2h00 d'autonomie (5 pièces)</span>
+            </div>
+
+            <p style="margin-bottom: 24px; color: #475569;">
+                Créez un nouvel onglet <strong>Part Studio</strong> pour chaque pièce (clic sur le <code>+</code> en bas à gauche d'Onshape &gt; <em>Create Part Studio</em>). Lisez attentivement les esquisses et plans cotés ci-dessous, appliquez la méthodologie et vérifiez votre volume à l'aide de l'outil <strong>Mass Properties</strong> (icône balance en bas à droite).
+            </p>
+
+            <!-- PIÈCE 1 -->
+            <div class="piece-box" id="piece-1">
+                <div class="piece-header">
+                    <h3>
+                        <span class="piece-num-badge">1</span>
+                        Pièce 1 : Le Bras de Manivelle (Bielle de guidage)
+                    </h3>
+                    <span class="piece-level level-1">Niveau 1 : Esquisse & Extrusion</span>
+                </div>
+
+                <div class="sketch-view-container">
+                    <div class="view-panel">
+                        <div class="view-panel-header">
+                            <span class="view-panel-title">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+                                Esquisse 2D Cotée (Front Plane)
+                            </span>
+                            <span class="view-tag">Cotes en mm • Extrusion : 6 mm</span>
+                        </div>
+                        <svg viewBox="0 0 460 280" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <marker id="ar1" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 2 L 10 5 L 0 8 z" fill="#0f172a"/>
+                                </marker>
+                            </defs>
+
+                            <rect width="460" height="280" fill="#f8fafc" rx="6" stroke="#e2e8f0"/>
+                            <path d="M 30 140 H 430 M 110 30 V 250 M 350 30 V 250" stroke="#e2e8f0" stroke-width="1"/>
+
+                            <!-- Axe de symétrie horizontal -->
+                            <line x1="40" y1="140" x2="420" y2="140" stroke="#dc2626" stroke-width="1.3" stroke-dasharray="14,3,3,3"/>
+                            <text x="375" y="133" font-family="'Consolas', monospace" font-size="10" font-weight="bold" fill="#dc2626">Axe sym.</text>
+
+                            <!-- Trait d'axe vertical tête et pied -->
+                            <line x1="110" y1="60" x2="110" y2="220" stroke="#dc2626" stroke-width="1" stroke-dasharray="8,2,2,2"/>
+                            <line x1="350" y1="70" x2="350" y2="210" stroke="#dc2626" stroke-width="1" stroke-dasharray="8,2,2,2"/>
+
+                            <!-- Contour extérieur de la bielle -->
+                            <path d="M 110 80
+                                     A 60 60 0 1 0 110 200
+                                     L 350 180
+                                     A 40 40 0 1 0 350 100
+                                     Z"
+                                  fill="#bfdbfe" fill-opacity="0.35" stroke="#1e3a8a" stroke-width="2.5" stroke-linejoin="round"/>
+
+                            <!-- Alésage tête ⌀12 -->
+                            <circle cx="110" cy="140" r="24" fill="#ffffff" stroke="#1e3a8a" stroke-width="2"/>
+
+                            <!-- Alésage pied ⌀8 -->
+                            <circle cx="350" cy="140" r="16" fill="#ffffff" stroke="#1e3a8a" stroke-width="2"/>
+
+                            <!-- Lumière oblongue centrale : entraxe 24mm, largeur 6mm (R3) -->
+                            <path d="M 182 128 L 278 128 A 12 12 0 0 1 278 152 L 182 152 A 12 12 0 0 1 182 128 Z"
+                                  fill="#ffffff" stroke="#1e3a8a" stroke-width="2"/>
+
+                            <!-- COTATIONS -->
+                            <line x1="110" y1="140" x2="110" y2="250" stroke="#94a3b8" stroke-width="1"/>
+                            <line x1="350" y1="140" x2="350" y2="250" stroke="#94a3b8" stroke-width="1"/>
+                            <line x1="110" y1="240" x2="350" y2="240" stroke="#0f172a" stroke-width="1.3" marker-start="url(#ar1)" marker-end="url(#ar1)"/>
+                            <rect x="216" y="231" width="28" height="17" fill="#ffffff"/>
+                            <text x="230" y="244" font-family="'Consolas', monospace" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">60</text>
+
+                            <!-- Tête : Rayon R15 et Alésage ⌀12 -->
+                            <line x1="110" y1="140" x2="68" y2="98" stroke="#0f172a" stroke-width="1.2" marker-end="url(#ar1)"/>
+                            <text x="52" y="94" font-family="'Consolas', monospace" font-size="11" font-weight="bold" fill="#0f172a">R15</text>
+                            <line x1="110" y1="140" x2="128" y2="122" stroke="#0f172a" stroke-width="1.2" marker-end="url(#ar1)"/>
+                            <text x="130" y="118" font-family="'Consolas', monospace" font-size="11" font-weight="bold" fill="#0f172a">⌀12</text>
+
+                            <!-- Pied : Rayon R10 et Alésage ⌀8 -->
+                            <line x1="350" y1="140" x2="378" y2="112" stroke="#0f172a" stroke-width="1.2" marker-end="url(#ar1)"/>
+                            <text x="382" y="110" font-family="'Consolas', monospace" font-size="11" font-weight="bold" fill="#0f172a">R10</text>
+                            <line x1="350" y1="140" x2="338" y2="152" stroke="#0f172a" stroke-width="1.2" marker-end="url(#ar1)"/>
+                            <text x="316" y="166" font-family="'Consolas', monospace" font-size="11" font-weight="bold" fill="#0f172a">⌀8</text>
+
+                            <!-- Oblong : 24 mm et R3 -->
+                            <line x1="182" y1="128" x2="182" y2="85" stroke="#94a3b8" stroke-width="1"/>
+                            <line x1="278" y1="128" x2="278" y2="85" stroke="#94a3b8" stroke-width="1"/>
+                            <line x1="182" y1="92" x2="278" y2="92" stroke="#0f172a" stroke-width="1.2" marker-start="url(#ar1)" marker-end="url(#ar1)"/>
+                            <rect x="218" y="84" width="24" height="15" fill="#ffffff"/>
+                            <text x="230" y="95" font-family="'Consolas', monospace" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">24</text>
+                            <text x="216" y="170" font-family="'Consolas', monospace" font-size="11" font-weight="bold" fill="#0f172a">2x R3</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="instructions-grid">
+                    <div>
+                        <h4 style="font-weight:700; margin-bottom:6px; color:#1e293b;">Démarche sous Onshape :</h4>
+                        <ol class="steps-list">
+                            <li>Esquisse sur le <strong>Plan Front</strong>. Tracer la ligne d'axe de construction de <strong>60 mm</strong> passant par l'Origine.</li>
+                            <li>Tracer les cercles aux extrémités : <strong>⌀12 mm</strong> et <strong>R15 mm</strong> (diamètre extérieur ⌀30 mm) à gauche, <strong>⌀8 mm</strong> et <strong>R10 mm</strong> (diamètre extérieur ⌀20 mm) à droite.</li>
+                            <li>Relier les cercles extérieurs par deux droites et leur imposer la contrainte <strong>Tangente (T)</strong>.</li>
+                            <li>Ajouter la fente oblongue centrale (entraxe <strong>24 mm</strong>, rayon <strong>R3 mm</strong>, alignée sur l'axe).</li>
+                            <li>Vérifier que l'esquisse est <strong>entièrement noire</strong> (totalement contrainte), puis extruder (Extrude Solid) à une épaisseur de <strong>6 mm</strong>.</li>
+                        </ol>
+                    </div>
+
+                    <div class="verification-panel">
+                        <h4>
+                            <svg width="18" height="18" fill="#10b981" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            Autocontrôle du volume 3D
+                        </h4>
+                        <div class="v-data">
+                            Matériau : <code>Aluminium 6061</code><br>
+                            Volume théorique : <code>10 081 mm³ (± 25 mm³)</code><br>
+                            Masse attendue : <code>~27,2 g</code>
+                        </div>
+                        <div class="check-input-group">
+                            <input type="number" class="check-input" id="input-vol-1" placeholder="Ex: 10081">
+                            <button class="btn-check" onclick="checkVolume(1, 10081, 40)">Valider</button>
+                        </div>
+                        <div class="feedback-msg" id="feedback-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIÈCE 2 -->
+            <div class="piece-box" id="piece-2">
+                <div class="piece-header">
+                    <h3>
+                        <span class="piece-num-badge">2</span>
+                        Pièce 2 : La Poulie à Gorge Trapézoïdale
+                    </h3>
+                    <span class="piece-level level-2">Niveau 2 : Révolution (Revolve)</span>
+                </div>
+
+                <div class="sketch-view-container">
+                    <div class="view-panel">
+                        <div class="view-panel-header">
+                            <span class="view-panel-title">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                Esquisse 2D Cotée (UN SEUL CÔTÉ au-dessus de l'axe)
+                            </span>
+                            <span class="view-tag" style="background:#fee2e2; color:#991b1b;">Axe + Demi-Profil</span>
+                        </div>
+                        <svg viewBox="0 0 460 280" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <marker id="ar2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 2 L 10 5 L 0 8 z" fill="#0f172a"/>
+                                </marker>
+                            </defs>
+
+                            <rect width="460" height="280" fill="#f8fafc" rx="6" stroke="#e2e8f0"/>
+                            <line x1="40" y1="210" x2="420" y2="210" stroke="#fecaca" stroke-width="1"/>
+
+                            <!-- AXE DE RÉVOLUTION -->
+                            <line x1="30" y1="210" x2="430" y2="210" stroke="#dc2626" stroke-width="2" stroke-dasharray="16,3,4,3"/>
+                            <text x="320" y="226" font-family="'Consolas', monospace" font-size="11" font-weight="bold" fill="#dc2626">Axe de Révolution (Q)</text>
+
+                            <!-- DEMI-PROFIL FERMÉ -->
+                            <path d="M 140 185
+                                     L 140 85
+                                     L 180 85
+                                     L 200 125
+                                     L 240 125
+                                     L 260 85
+                                     L 300 85
+                                     L 300 185
+                                     Z"
+                                  fill="#bfdbfe" fill-opacity="0.45" stroke="#1e3a8a" stroke-width="2.8" stroke-linejoin="round"/>
+
+                            <rect x="175" y="145" width="90" height="20" fill="#ffffff" rx="4" opacity="0.9"/>
+                            <text x="220" y="159" font-family="'Segoe UI', sans-serif" font-size="9" font-weight="bold" fill="#1e40af" text-anchor="middle">Région fermée (1 seul côté)</text>
+
+                            <!-- COTATIONS AU DIAMÈTRE -->
+                            <line x1="300" y1="85" x2="365" y2="85" stroke="#94a3b8" stroke-width="1"/>
+                            <line x1="355" y1="85" x2="355" y2="210" stroke="#0f172a" stroke-width="1.2" marker-start="url(#ar2)" marker-end="url(#ar2)"/>
+                            <rect x="340" y="138" width="30" height="16" fill="#ffffff"/>
+                            <text x="355" y="150" font-family="'Consolas', monospace" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">⌀50</text>
+
+                            <line x1="240" y1="125" x2="330" y2="125" stroke="#94a3b8" stroke-width="1"/>
+                            <line x1="320" y1="125" x2="320" y2="210" stroke="#0f172a" stroke-width="1.2" marker-start="url(#ar2)" marker-end="url(#ar2)"/>
+                            <rect x="306" y="160" width="28" height="15" fill="#ffffff"/>
+                            <text x="320" y="172" font-family="'Consolas', monospace" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">⌀34</text>
+
+                            <line x1="140" y1="185" x2="90" y2="185" stroke="#94a3b8" stroke-width="1"/>
+                            <line x1="105" y1="185" x2="105" y2="210" stroke="#0f172a" stroke-width="1.2" marker-start="url(#ar2)" marker-end="url(#ar2)"/>
+                            <rect x="92" y="191" width="26" height="15" fill="#ffffff"/>
+                            <text x="105" y="202" font-family="'Consolas', monospace" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">⌀10</text>
+
+                            <!-- COTATIONS DE LONGUEURS -->
+                            <line x1="140" y1="85" x2="140" y2="40" stroke="#94a3b8" stroke-width="1"/>
+                            <line x1="300" y1="85" x2="300" y2="40" stroke="#94a3b8" stroke-width="1"/>
+                            <line x1="140" y1="48" x2="300" y2="48" stroke="#0f172a" stroke-width="1.2" marker-start="url(#ar2)" marker-end="url(#ar2)"/>
+                            <rect x="210" y="40" width="20" height="16" fill="#ffffff"/>
+                            <text x="220" y="52" font-family="'Consolas', monospace" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">16</text>
+
+                            <line x1="180" y1="85" x2="180" y2="60" stroke="#94a3b8" stroke-width="1"/>
+                            <line x1="260" y1="85" x2="260" y2="60" stroke="#94a3b8" stroke-width="1"/>
+                            <line x1="180" y1="66" x2="260" y2="66" stroke="#0f172a" stroke-width="1" marker-start="url(#ar2)" marker-end="url(#ar2)"/>
+                            <rect x="214" y="58" width="14" height="14" fill="#ffffff"/>
+                            <text x="221" y="69" font-family="'Consolas', monospace" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">8</text>
+
+                            <line x1="200" y1="125" x2="240" y2="125" stroke="#d97706" stroke-width="2"/>
+                            <text x="220" y="118" font-family="'Consolas', monospace" font-size="10" font-weight="bold" fill="#d97706" text-anchor="middle">Fond 4</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="instructions-grid">
+                    <div>
+                        <h4 style="font-weight:700; margin-bottom:6px; color:#1e293b;">Démarche sous Onshape :</h4>
+                        <ol class="steps-list">
+                            <li>Créer une esquisse sur le <strong>Plan Right ou Front</strong>.</li>
+                            <li>Tracer une ligne de construction horizontale passant par l'Origine (l'axe de révolution).</li>
+                            <li>Tracer le contour d'esquisse fermé <strong>strictement au-dessus de l'axe</strong>.</li>
+                            <li>Appliquer les cotes au diamètre : clic segment &gt; clic axe &gt; placer le curseur sous l'axe (<code>⌀10</code>, <code>⌀34</code>, <code>⌀50</code>).</li>
+                            <li>Coter les largeurs : largeur totale <strong>16 mm</strong>, sommet de gorge <strong>8 mm</strong> et fond de gorge <strong>4 mm</strong> (symétrique).</li>
+                            <li>Lancer l'outil <strong>Revolve</strong>, sélectionner la région fermée et l'axe pour une rotation à 360°.</li>
+                        </ol>
+                    </div>
+
+                    <div class="verification-panel">
+                        <h4>
+                            <svg width="18" height="18" fill="#10b981" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            Autocontrôle du volume 3D
+                        </h4>
+                        <div class="v-data">
+                            Matériau : <code>Acier doux / POM Delrin</code><br>
+                            Volume théorique : <code>23 692 mm³ (± 35 mm³)</code><br>
+                            Volume en cm³ : <code>23,69 cm³</code>
+                        </div>
+                        <div class="check-input-group">
+                            <input type="number" class="check-input" id="input-vol-2" placeholder="Ex: 23692">
+                            <button class="btn-check" onclick="checkVolume(2, 23692, 45)">Valider</button>
+                        </div>
+                        <div class="feedback-msg" id="feedback-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIÈCE 3 -->
+            <div class="piece-box" id="piece-3">
+                <div class="piece-header">
+                    <h3>
+                        <span class="piece-num-badge">3</span>
+                        Pièce 3 : Le Galet de Guidage Épaulé à Gorge Ronde
+                    </h3>
+                    <span class="piece-level level-2">Niveau 2 : Arc Tangent & Révolution</span>
+                </div>
+
+                <div class="sketch-view-container">
+                    <div class="view-panel">
+                        <div class="view-panel-header">
+                            <span class="view-panel-title">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                Esquisse 2D Cotée (UN SEUL CÔTÉ au-dessus de l'axe)
+                            </span>
+                            <span class="view-tag" style="background:#fef3c7; color:#92400e;">Arc R3 + Épaulement</span>
+                        </div>
+                        <svg viewBox="0 0 460 280" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <marker id="ar3" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 2 L 10 5 L 0 8 z" fill="#0f172a"/>
+                                </marker>
+                            </defs>
+
+                            <rect width="460" height="280" fill="#f8fafc" rx="6" stroke="#e2e8f0"/>
+                            <line x1="30" y1="210" x2="430" y2="210" stroke="#dc2626" stroke-width="2" stroke-dasharray="16,3,4,3"/>
+                            <text x="325" y="226" font-family="'Consolas', monospace" font-size="11" font-weight="bold" fill="#dc2626">Axe (X)</text>
+
+                            <!-- DEMI-PROFIL ÉPAULÉ -->
+                            <path d="M 110 170
+                                     L 110 130
+                                     L 190 130
+                                     L 190 80
+                                     L 240 80
+                                     A 30 30 0 0 0 300 80
+                                     L 350 80
+                                     L 350 170
+                                     Z"
+                                  fill="#fef3c7" fill-opacity="0.65" stroke="#1e3a8a" stroke-width="2.8" stroke-linejoin="round"/>
+
+                            <line x1="270" y1="65" x2="270" y2="120" stroke="#dc2626" stroke-width="1" stroke-dasharray="4,2"/>
+
+                            <!-- COTATIONS -->
+                            <line x1="110" y1="130" x2="110" y2="40" stroke="#94a3b8" stroke-width="1"/>
+                            <line x1="350" y1="80" x2="350" y2="40" stroke="#94a3b8" stroke-width="1"/>
+                            <line x1="110" y1="46" x2="350" y2="46" stroke="#0f172a" stroke-width="1.2" marker-start="url(#ar3)" marker-end="url(#ar3)"/>
+                            <rect x="220" y="38" width="22" height="16" fill="#ffffff"/>
+                            <text x="231" y="50" font-family="'Consolas', monospace" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">24</text>
+
+                            <line x1="190" y1="130" x2="190" y2="55" stroke="#94a3b8" stroke-width="1"/>
+                            <line x1="110" y1="60" x2="190" y2="60" stroke="#0f172a" stroke-width="1.2" marker-start="url(#ar3)" marker-end="url(#ar3)"/>
+                            <rect x="144" y="52" width="14" height="15" fill="#ffffff"/>
+                            <text x="151" y="64" font-family="'Consolas', monospace" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">8</text>
+
+                            <line x1="110" y1="72" x2="270" y2="72" stroke="#0f172a" stroke-width="1" marker-start="url(#ar3)" marker-end="url(#ar3)"/>
+                            <rect x="184" y="65" width="16" height="14" fill="#ffffff"/>
+                            <text x="192" y="76" font-family="'Consolas', monospace" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">16</text>
+
+                            <line x1="270" y1="80" x2="285" y2="98" stroke="#d97706" stroke-width="1.3" marker-end="url(#ar3)"/>
+                            <text x="282" y="114" font-family="'Consolas', monospace" font-size="11" font-weight="bold" fill="#d97706">R3</text>
+
+                            <!-- Diamètres par rapport à l'axe -->
+                            <line x1="350" y1="80" x2="410" y2="80" stroke="#94a3b8" stroke-width="1"/>
+                            <line x1="400" y1="80" x2="400" y2="210" stroke="#0f172a" stroke-width="1.2" marker-start="url(#ar3)" marker-end="url(#ar3)"/>
+                            <rect x="386" y="135" width="28" height="16" fill="#ffffff"/>
+                            <text x="400" y="147" font-family="'Consolas', monospace" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">⌀40</text>
+
+                            <line x1="190" y1="130" x2="70" y2="130" stroke="#94a3b8" stroke-width="1"/>
+                            <line x1="80" y1="130" x2="80" y2="210" stroke="#0f172a" stroke-width="1.2" marker-start="url(#ar3)" marker-end="url(#ar3)"/>
+                            <rect x="67" y="162" width="26" height="16" fill="#ffffff"/>
+                            <text x="80" y="174" font-family="'Consolas', monospace" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">⌀24</text>
+
+                            <text x="230" y="186" font-family="'Consolas', monospace" font-size="11" font-weight="bold" fill="#0f172a">Alésage ⌀12</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="instructions-grid">
+                    <div>
+                        <h4 style="font-weight:700; margin-bottom:6px; color:#1e293b;">Démarche sous Onshape :</h4>
+                        <ol class="steps-list">
+                            <li>Créer une esquisse sur le <strong>Plan Front ou Right</strong>.</li>
+                            <li>Tracer la ligne de construction pour l'axe de révolution (raccourci <code>Q</code>).</li>
+                            <li>Tracer le contour d'esquisse <strong>d'un seul côté au-dessus de l'axe</strong> en intégrant l'arc par 3 points (ou demi-cercle) de rayon <strong>R3</strong> pour la gorge.</li>
+                            <li>Coter la position du centre de la gorge à <strong>16 mm</strong> et la longueur de moyeu à <strong>8 mm</strong> (longueur totale <strong>24 mm</strong>).</li>
+                            <li>Coter les diamètres au moyen de l'axe : <code>⌀12</code> (alésage), <code>⌀24</code> (moyeu), <code>⌀40</code> (corps).</li>
+                            <li>Lancer <strong>Revolve</strong> à 360°.</li>
+                        </ol>
+                    </div>
+
+                    <div class="verification-panel">
+                        <h4>
+                            <svg width="18" height="18" fill="#10b981" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            Autocontrôle du volume 3D
+                        </h4>
+                        <div class="v-data">
+                            Matériau : <code>Bronze / Acier / Laiton</code><br>
+                            Volume théorique : <code>19 348 mm³ (± 35 mm³)</code><br>
+                            Volume en cm³ : <code>19,35 cm³</code>
+                        </div>
+                        <div class="check-input-group">
+                            <input type="number" class="check-input" id="input-vol-3" placeholder="Ex: 19348">
+                            <button class="btn-check" onclick="checkVolume(3, 19348, 45)">Valider</button>
+                        </div>
+                        <div class="feedback-msg" id="feedback-3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIÈCE 4 (Nouvel Exercice 1) -->
+            <div class="piece-box" id="piece-4">
+                <div class="piece-header">
+                    <h3>
+                        <span class="piece-num-badge">4</span>
+                        Pièce 4 : L'Arbre Épaulé à Collerette (Axe de transmission robotique)
+                    </h3>
+                    <span class="piece-level level-3">Niveau 3 : Révolution multi-paliers, Perçages & Méplat</span>
+                </div>
+
+                <div class="sketch-view-container">
+                    <div class="view-panel view-panel-full">
+                        <div class="view-panel-header">
+                            <span class="view-panel-title">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                Plan de Définition Normalisé (Arbre à Collerette)
+                            </span>
+                            <span class="view-tag" style="background:#fef3c7; color:#92400e;">Tolérances ISO h7 • Cotes en mm</span>
+                        </div>
+                        <div class="plan-img-wrapper">
+                            <img src="img/exercice_arbre_bride.png" alt="Plan technique de l'Arbre épaulé à collerette" class="plan-img" onclick="openModal(this.src)">
+                            <div class="zoom-hint">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                                Cliquer pour agrandir le plan
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instructions-grid">
+                    <div>
+                        <h4 style="font-weight:700; margin-bottom:6px; color:#1e293b;">Démarche sous Onshape :</h4>
+                        <ol class="steps-list">
+                            <li><strong>Révolution du corps principal :</strong> Esquisse sur le <strong>Plan Front</strong>. Tracer la ligne d'axe de construction passant par l'Origine. Dessiner le demi-profil étagé d'un seul côté :
+                                <ul style="margin: 5px 0 5px 18px; font-size: 0.88rem; color:#475569;">
+                                    <li>Téton de centrage : longueur <strong>1,0 mm</strong>, cote au diamètre <strong>⌀18 mm</strong>.</li>
+                                    <li>Collerette (bride) : épaisseur <strong>3,00 mm</strong>, cote au diamètre <strong>⌀30,00 mm</strong>.</li>
+                                    <li>Dégagement : longueur <strong>14,0 mm</strong>, cote au diamètre <strong>⌀15,0 mm</strong>.</li>
+                                    <li>Portée de guidage : longueur <strong>32,5 mm</strong>, cote au diamètre <strong>⌀20 mm</strong>.</li>
+                                    <li>Bout d'arbre : longueur <strong>17,57 mm</strong>, cote au diamètre <strong>⌀10,0 mm</strong>.</li>
+                                </ul>
+                                Valider avec la fonction <strong>Revolve</strong> à 360°.
+                            </li>
+                            <li><strong>Congés de raccordement :</strong> Fonction <em>Fillet</em> :
+                                <strong>R2 mm</strong> entre le dégagement (⌀15) et la portée (⌀20), et <strong>R1 mm</strong> entre la portée (⌀20) et le bout d'arbre (⌀10).
+                            </li>
+                            <li><strong>Perçages de la bride :</strong> Créer une esquisse sur la face avant de la collerette. Tracer un cercle de construction de diamètre <strong>⌀24 mm</strong>. Placer un cercle de <strong>⌀4,5 mm</strong> aligné verticalement. Extruder en enlèvement traversant (<em>Extrude Remove - Through all</em>). Utiliser <strong>Circular Pattern</strong> : 6 occurrences réparties sur 360°.</li>
+                            <li><strong>Méplat en bout d'arbre :</strong> Esquisse sur le plan Top (ou d'extrémité). Retirer de la matière (<em>Extrude Remove</em>) sur une longueur borgne de <strong>10,4 mm</strong> depuis l'extrémité droite pour obtenir la cote sur plat de <strong>9,7 mm</strong> (profondeur 0,3 mm).</li>
+                        </ol>
+                    </div>
+
+                    <div class="verification-panel">
+                        <h4>
+                            <svg width="18" height="18" fill="#10b981" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            Autocontrôle du volume 3D
+                        </h4>
+                        <div class="v-data">
+                            Matériau : <code>Acier standard / Inox</code><br>
+                            Volume théorique : <code>16 196 mm³ (± 40 mm³)</code><br>
+                            Masse attendue : <code>~127,1 g</code> (densité 7,85 g/cm³)
+                        </div>
+                        <div class="check-input-group">
+                            <input type="number" class="check-input" id="input-vol-4" placeholder="Ex: 16196">
+                            <button class="btn-check" onclick="checkVolume(4, 16196, 50)">Valider</button>
+                        </div>
+                        <div class="feedback-msg" id="feedback-4"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIÈCE 5 (Nouvel Exercice 2) -->
+            <div class="piece-box" id="piece-5">
+                <div class="piece-header">
+                    <h3>
+                        <span class="piece-num-badge">5</span>
+                        Pièce 5 : La Bielle de Jambe Robotique (HER Robotic Legs - Connecting Rod)
+                    </h3>
+                    <span class="piece-level level-pro">Niveau 3 / Défi : Bielle robotique profilée & Usinage</span>
+                </div>
+
+                <!-- Callout d'assemblage mécanique -->
+                <div class="assembly-callout">
+                    <div class="assembly-callout-icon">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <p>
+                        <strong>Liaison cinématique remarquable :</strong> Observez bien la tête circulaire de cette bielle ! Elle comporte exactement les mêmes <strong>6 perçages ⌀4,5 mm répartis sur le diamètre ⌀24,0 mm</strong> que la bride de la pièce 4 précédente. Ces deux pièces constituent un sous-ensemble mécanique réel articulé du robot bipède "HER robotic legs".
+                    </p>
+                </div>
+
+                <div class="sketch-view-container">
+                    <div class="view-panel view-panel-full">
+                        <div class="view-panel-header">
+                            <span class="view-panel-title">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                Plan de Définition : HER Robotic Legs Connecting Rod
+                            </span>
+                            <span class="view-tag" style="background:#f3e8ff; color:#6b21a8;">Aluminium 6061-T6 • Échelle 1:1</span>
+                        </div>
+                        <div class="plan-img-wrapper">
+                            <img src="img/exercice_bielle_her.png" alt="Plan technique de la bielle de robot HER" class="plan-img" onclick="openModal(this.src)">
+                            <div class="zoom-hint">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                                Cliquer pour agrandir le plan
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instructions-grid">
+                    <div>
+                        <h4 style="font-weight:700; margin-bottom:6px; color:#1e293b;">Démarche sous Onshape :</h4>
+                        <ol class="steps-list">
+                            <li><strong>Esquisse du profil principal (Front Plane) :</strong>
+                                <ul style="margin: 5px 0 5px 18px; font-size: 0.88rem; color:#475569;">
+                                    <li>Tracer un cercle de tête de rayon <strong>R18,2 mm</strong> centré sur l'Origine (diamètre ⌀36,4 mm).</li>
+                                    <li>Sur l'axe horizontal, à un entraxe de <strong>80,00 mm</strong>, tracer l'arc de pied de rayon <strong>R8 mm</strong>.</li>
+                                    <li>Tracer deux segments reliant les cercles, imposer la contrainte <strong>Tangente (T)</strong> aux extrémités et coter l'angle d'ouverture entre les deux flancs à <strong>14°</strong> (7° de part et d'autre).</li>
+                                    <li>Vérifier la longueur hors-tout : <code>18,2 + 80 + 8 = 106,2 mm</code>.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Extrusion de base :</strong> Fonction <em>Extrude Solid</em> à une épaisseur totale de <strong>9,1 mm</strong>.</li>
+                            <li><strong>Perçages d'assemblage :</strong>
+                                <ul style="margin: 5px 0 5px 18px; font-size: 0.88rem; color:#475569;">
+                                    <li>Tête : cercle de construction <strong>⌀24,0 mm</strong>, perçage de <strong>6 trous ⌀4,5 mm THRU</strong> par <em>Circular Pattern</em>.</li>
+                                    <li>Pied : percer le premier trou de <strong>⌀8 mm THRU</strong> au centre de l'arc R8 (à 80 mm). Percer le second trou de <strong>⌀8 mm THRU</strong> à un entraxe de <strong>15,00 mm</strong> (à 65 mm de l'origine).</li>
+                                </ul>
+                            </li>
+                            <li><strong>Fraisage d'allègement (poche inférieure) :</strong> Sur la face inférieure, esquisser la découpe qui conserve l'extrémité droite sur <strong>30,92 mm</strong>. Extruder en enlèvement de matière (<em>Extrude Remove</em>) sur une profondeur de <strong>4,1 mm</strong> (épaisseur restante : 5,0 mm).</li>
+                            <li><strong>Raccordements :</strong> Appliquer les congés de <strong>R1/4 in</strong> (soit <code>6,35 mm</code>) sur les transitions intérieures de l'usinage.</li>
+                        </ol>
+                    </div>
+
+                    <div class="verification-panel">
+                        <h4>
+                            <svg width="18" height="18" fill="#10b981" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            Autocontrôle du volume 3D
+                        </h4>
+                        <div class="v-data">
+                            Matériau : <code>Aluminium 6061-T6</code><br>
+                            Volume théorique : <code>19 750 mm³ (± 500 mm³)</code><br>
+                            Masse attendue : <code>~53,3 g</code> (densité 2,70 g/cm³)
+                        </div>
+                        <div class="check-input-group">
+                            <input type="number" class="check-input" id="input-vol-5" placeholder="Ex: 19750">
+                            <button class="btn-check" onclick="checkVolume(5, 19750, 600)">Valider</button>
+                        </div>
+                        <div class="feedback-msg" id="feedback-5"></div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Grille d'évaluation -->
+        <section class="card" id="evaluation">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                    3. Bilan de la séance & Validation des compétences
+                </h2>
+                <span class="card-time-tag">Évaluation sur 20 points (Séance 3h)</span>
+            </div>
+
+            <table class="eval-table">
+                <thead>
+                    <tr>
+                        <th class="checkbox-cell">Fait</th>
+                        <th>Critères d'évaluation (Seconde Sciences de l'Ingénieur)</th>
+                        <th style="width: 150px;">Validation</th>
+                        <th style="width: 90px; text-align:center;">Barème</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="checkbox-cell"><input type="checkbox" onchange="updateProgress()"></td>
+                        <td><strong>Activité 1 validée :</strong> Réalisation de l'exercice <em>Intermediate Sketching</em> (tangences, lignes noires).</td>
+                        <td>Acquis / Non acquis</td>
+                        <td style="text-align:center; font-weight:bold;">2 pts</td>
+                    </tr>
+                    <tr>
+                        <td class="checkbox-cell"><input type="checkbox" onchange="updateProgress()"></td>
+                        <td><strong>Activité 2 validée :</strong> Réalisation de l'exercice <em>Revolve</em> (axe de révolution, cotation au diamètre).</td>
+                        <td>Acquis / Non acquis</td>
+                        <td style="text-align:center; font-weight:bold;">2 pts</td>
+                    </tr>
+                    <tr>
+                        <td class="checkbox-cell"><input type="checkbox" onchange="updateProgress()"></td>
+                        <td><strong>Pièce 1 (Manivelle) :</strong> Esquisse totalement contrainte, volume conforme (10 081 mm³ ±25).</td>
+                        <td>Acquis / Non acquis</td>
+                        <td style="text-align:center; font-weight:bold;">3 pts</td>
+                    </tr>
+                    <tr>
+                        <td class="checkbox-cell"><input type="checkbox" onchange="updateProgress()"></td>
+                        <td><strong>Pièce 2 (Poulie) :</strong> Demi-profil fermé sur 1 seul côté de l'axe, volume conforme (23 692 mm³ ±35).</td>
+                        <td>Acquis / Non acquis</td>
+                        <td style="text-align:center; font-weight:bold;">3 pts</td>
+                    </tr>
+                    <tr>
+                        <td class="checkbox-cell"><input type="checkbox" onchange="updateProgress()"></td>
+                        <td><strong>Pièce 3 (Galet) :</strong> Révolution avec gorge circulaire R3, volume conforme (19 348 mm³ ±35).</td>
+                        <td>Acquis / Non acquis</td>
+                        <td style="text-align:center; font-weight:bold;">3 pts</td>
+                    </tr>
+                    <tr>
+                        <td class="checkbox-cell"><input type="checkbox" onchange="updateProgress()"></td>
+                        <td><strong>Pièce 4 (Arbre à collerette) :</strong> Révolution multi-paliers, 6 perçages ⌀4,5 en répétition circulaire, méplat (16 196 mm³ ±40).</td>
+                        <td>Approfondissement</td>
+                        <td style="text-align:center; font-weight:bold;">4 pts</td>
+                    </tr>
+                    <tr>
+                        <td class="checkbox-cell"><input type="checkbox" onchange="updateProgress()"></td>
+                        <td><strong>Pièce 5 (Bielle robotique HER) :</strong> Profil à 14°, 6 trous ⌀4,5 sur ⌀24, 2 alésages ⌀8, usinage d'allègement de 4,1 mm (19 750 mm³ ±500).</td>
+                        <td>Défi d'application</td>
+                        <td style="text-align:center; font-weight:bold;">3 pts</td>
+                    </tr>
+                    <tr style="background:#f8fafc; font-weight:bold;">
+                        <td colspan="3" style="text-align:right; padding-right:20px;">Total général :</td>
+                        <td style="text-align:center; color:#1e40af; font-size:1.1rem;">/ 20 pts</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </div>
+
+    <!-- Visionneuse Modale Plein Écran pour les plans -->
+    <div class="modal-overlay" id="imageModal" onclick="closeModal()">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <img id="modalImg" src="" alt="Plan agrandi">
+        </div>
+    </div>
+
+    <!-- Script de validation interactive et visionneuse -->
+    <script>
+        function checkVolume(pieceId, target, tolerance) {
+            const input = document.getElementById('input-vol-' + pieceId);
+            const feedback = document.getElementById('feedback-' + pieceId);
+            const val = parseFloat(input.value);
+
+            if (isNaN(val)) {
+                feedback.innerHTML = '<span style="color:#dc2626;">⚠️ Entrez un nombre valide !</span>';
+                return;
+            }
+
+            const diff = Math.abs(val - target);
+            if (diff <= tolerance) {
+                feedback.innerHTML = `<span style="color:#059669;">✅ Parfait ! Volume conforme (${val} mm³ ≈ cible ${target} mm³).</span>`;
+                const checkboxes = document.querySelectorAll('.eval-table input[type="checkbox"]');
+                // Index 0: Tuto 1, Index 1: Tuto 2, Index 2: Pièce 1, Index 3: Pièce 2, Index 4: Pièce 3, Index 5: Pièce 4, Index 6: Pièce 5
+                if (checkboxes[pieceId + 1]) {
+                    checkboxes[pieceId + 1].checked = true;
+                    updateProgress();
+                }
+            } else {
+                let aide = val > target ? 'Volume trop grand (vérifiez les diamètres, alésages ou usinages d\'allègement)' : 'Volume trop petit (vérifiez les cotes, congés ou la longueur totale)';
+                feedback.innerHTML = `<span style="color:#dc2626;">❌ Écart (${val} mm³ vs ${target} mm³ attendu). ${aide}.</span>`;
+            }
+        }
+
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.eval-table input[type="checkbox"]');
+            let checkedCount = 0;
+            checkboxes.forEach(cb => {
+                if (cb.checked) checkedCount++;
+            });
+
+            const percent = Math.round((checkedCount / checkboxes.length) * 100);
+            document.getElementById('global-progress').style.width = percent + '%';
+            document.getElementById('progress-percent').innerText = percent + '%';
+
+            const states = Array.from(checkboxes).map(cb => cb.checked);
+            localStorage.setItem('onshape_tp_2si_progress_v3', JSON.stringify(states));
+        }
+
+        function openModal(src) {
+            document.getElementById('modalImg').src = src;
+            document.getElementById('imageModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('onshape_tp_2si_progress_v3');
+            if (saved) {
+                try {
+                    const states = JSON.parse(saved);
+                    const checkboxes = document.querySelectorAll('.eval-table input[type="checkbox"]');
+                    checkboxes.forEach((cb, idx) => {
+                        if (states[idx]) cb.checked = true;
+                    });
+                    updateProgress();
+                } catch (e) {}
+            }
+        });
+    </script>
+</body>
+</html>
