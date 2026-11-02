@@ -174,6 +174,53 @@
             background: #f8fafc;
         }
 
+
+        /* Appel Compte-Rendu Classroom */
+        .classroom-callout {
+            background: #eff6ff;
+            border: 2px solid #3b82f6;
+            border-left: 6px solid #1d4ed8;
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin: 22px 0 28px 0;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
+        }
+        .classroom-callout-icon {
+            color: #1d4ed8;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .classroom-callout h4 {
+            color: #1e3a8a;
+            font-size: 1.08rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .classroom-callout p {
+            font-size: 0.92rem;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        .cr-reminder {
+            margin-top: 12px;
+            padding: 8px 12px;
+            background: #eff6ff;
+            border: 1px dashed #3b82f6;
+            border-radius: 6px;
+            font-size: 0.83rem;
+            color: #1e40af;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         /* Cartes de sections */
         .card {
             background: var(--bg-card);
@@ -750,17 +797,17 @@
                         <polyline points="2 17 12 22 22 17"></polyline>
                         <polyline points="2 12 12 17 22 12"></polyline>
                     </svg>
-                    TP CAO 3D Onshape : Esquisse Avancée, Révolution & Mécanismes
+                    TP CAO 3D Onshape : Révolution, Balayage (Sweep), Coque & Nervures
                 </h1>
-                <p>Enseignement d'exploration Seconde Sciences de l'Ingénieur (SI & CIT) — Conception volumique 3D & Lecture de plans</p>
+                <p>Enseignement d'exploration Seconde Sciences de l'Ingénieur (SI & CIT) — Modélisation volumique 3D & Lecture de plans techniques</p>
             </div>
             <div class="badges">
                 <span class="badge badge-time">
                     <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
-                    Durée de la séance : 3h00
+                    Durée : 3h00 à 4h30 (Parcours Modulaire)
                 </span>
-                <span class="badge">Niveau : 2nde SI</span>
-                <span class="badge">5 Pièces d'application + 2 Tutoriels</span>
+                <span class="badge">Niveau : 2nde SI / CIT</span>
+                <span class="badge">5 Tutoriels Officiels + 7 Pièces d'application & Défi en autonomie</span>
             </div>
         </div>
     </header>
@@ -788,6 +835,24 @@
             </div>
         </div>
 
+        <!-- Consigne générale obligatoire : Compte-rendu Classroom Docs -->
+        <div class="classroom-callout">
+            <div class="classroom-callout-icon">
+                <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <div>
+                <h4>
+                    <span>📝 Consigne Obligatoire : Compte-Rendu Numérique Docs sur Google Classroom</span>
+                </h4>
+                <p>
+                    Pour <strong>TOUTES les conceptions et activités modélisées</strong> (tutoriels officiels <em>Intermediate Sketching</em>, <em>Revolve</em>, <em>Sweep</em>, <em>Coffee Cup</em>, <em>Wheel Rim</em>, pièces d'application 1 à 6 et grand défi d'autonomie) : <br>
+                    <strong>1. Capture d'écran 3D :</strong> Réalisez une copie d'écran claire de chaque pièce terminée sous Onshape en vue isométrique 3D (avec l'arbre des fonctions visible à gauche). <br>
+                    <strong>2. Insertion dans Docs Classroom :</strong> <strong>Collez chaque copie directement dans votre document de compte-rendu Docs</strong> assigné dans le devoir Google Classroom. <br>
+                    <strong>3. Relevé des grandeurs physiques :</strong> Sous chaque capture, indiquez le <strong>nom de la pièce</strong>, le <strong>matériau assigné</strong>, ainsi que le <strong>volume</strong> (en mm³ ou cm³) et la <strong>masse</strong> (en grammes) mesurés avec l'outil <em>Mass Properties</em> (icône balance en bas à droite).
+                </p>
+            </div>
+        </div>
+
         <!-- Règle d'or de conception -->
         <div class="golden-rule">
             <div class="golden-rule-icon">
@@ -801,6 +866,36 @@
                 </p>
             </div>
         </div>
+        <!-- Règle d'or pour la fonction Balayage (Sweep) -->
+        <div class="golden-rule" style="border-left-color: #0e9f6e; background: #f0fdf4;">
+            <div class="golden-rule-icon" style="color: #0e9f6e;">
+                <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <div>
+                <h4 style="color: #14532d;">Règle d'or Onshape pour la fonction Balayage (Sweep) : Le duo Chemin + Profil</h4>
+                <p style="color: #166534;">
+                    Pour générer un solide par balayage, il faut <strong>obligatoirement DEUX esquisses distinctes</strong> : <br>
+                    <strong>1. L'esquisse de Trajectoire (Chemin / Path) :</strong> Tracée sur un plan (ex: <em>Front</em>), elle définit la colonne vertébrale du solide (droites, arcs tangents, splines). <br>
+                    <strong>2. L'esquisse de Profil (Section) :</strong> Tracée sur un plan <strong>perpendiculaire (normal)</strong> passant par l'extrémité du chemin (ex: <em>Right</em> ou plan de référence normal). <br>
+                    💡 <em>L'astuce indispensable :</em> Appliquez une contrainte <strong>Coïncident</strong> (ou <strong>Perçant / Pierce</strong>) entre le centre du profil et l'extrémité du chemin pour garantir la continuité géométrique !
+                </p>
+            </div>
+        </div>
+
+        <!-- Règle d'or pour Dépouille, Coque et Nervures -->
+        <div class="golden-rule" style="border-left-color: #d97706; background: #fffbeb;">
+            <div class="golden-rule-icon" style="color: #d97706;">
+                <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+            </div>
+            <div>
+                <h4 style="color: #92400e;">Règles industrielles : Dépouille (Draft), Coque (Shell) et Nervure (Rib)</h4>
+                <p style="color: #78350f;">
+                    <strong>• Dépouille (Draft) :</strong> Pente d'angle (2° à 5°) indispensable pour démouler les pièces injectées en plastique ou fonderie sans arrachement. <br>
+                    <strong>• Coque (Shell) :</strong> Évide instantanément un solide en créant une épaisseur de paroi constante. Il suffit de sélectionner la face ouverte à supprimer (ex: l'ouverture d'une tasse ou d'un entonnoir). <br>
+                    <strong>• Nervure (Rib) :</strong> Renforce une pièce contre la flexion. Dans Onshape, tracez <strong>une simple ligne droite ouverte</strong> sur le plan médian : l'outil Rib prolonge automatiquement la matière jusqu'aux parois environnantes !
+                </p>
+            </div>
+        </div>
 
         <!-- Section 1 : Tutoriels officiels Onshape -->
         <section class="card">
@@ -809,7 +904,7 @@
                     <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                     1. Exercices guidés officiels (Onshape Learning Center)
                 </h2>
-                <span class="card-time-tag">~ 45 min (2 x ~22 min)</span>
+                <span class="card-time-tag">~ 2h15 (5 modules progressifs)</span>
             </div>
 
             <p style="margin-bottom: 20px; color: #475569;">
@@ -851,6 +946,63 @@
                     </div>
                     <a href="https://learn.onshape.com/learn/course/fundamentals-part-design-using-part-studios/creating-basic-part-features/exercise-revolve?page=2" target="_blank" rel="noopener noreferrer" class="link-btn">
                         <span>Ouvrir "Exercise: Revolve"</span>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    </a>
+                </div>
+
+                <!-- Module 3 (NEW : Exercise Sweep) -->
+                <div class="tuto-card">
+                    <span class="tuto-step-number" style="background: #0e9f6e;">Activité 3 • ~25 min</span>
+                    <div class="tuto-content">
+                        <h3>Exercise: Sweep (Fonction Balayage)</h3>
+                        <p>Générez un solide en faisant glisser un profil 2D fermé le long d'une trajectoire courbe continue.</p>
+                        <ul class="tuto-bullets">
+                            <li><strong>Trajectoire (Chemin / Path) :</strong> Esquisser le tracé sur le plan Front (arcs tangents et droites cotées).</li>
+                            <li><strong>Profil normalisé :</strong> Créer une esquisse de cercle ou section sur un plan perpendiculaire (Right).</li>
+                            <li><strong>Relation d'ancrage :</strong> Appliquer la contrainte <em>Coincident</em> entre le centre du cercle et le point terminal du chemin.</li>
+                            <li><strong>Fonction Sweep :</strong> Sélectionner le profil et la trajectoire pour générer le solide tubulaire continu.</li>
+                        </ul>
+                    </div>
+                    <a href="https://learn.onshape.com/learn/course/fundamentals-part-design-using-part-studios/creating-basic-part-features/exercise-sweep?page=1" target="_blank" rel="noopener noreferrer" class="link-btn" style="background: #0e9f6e;">
+                        <span>Ouvrir "Exercise: Sweep"</span>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    </a>
+                </div>
+
+                <!-- Module 4 (NEW : Exercise Coffee Cup) -->
+                <div class="tuto-card">
+                    <span class="tuto-step-number" style="background: #d97706;">Activité 4 • ~30 min</span>
+                    <div class="tuto-content">
+                        <h3>Exercise: Coffee Cup (Tasse avec anse)</h3>
+                        <p>Fusionnez la Révolution et le Balayage pour modéliser une tasse ergonomique complète avec évidement.</p>
+                        <ul class="tuto-bullets">
+                            <li><strong>Corps de la tasse (Revolve) :</strong> Demi-profil conique fermé tourné à 360° autour de l'axe central vertical.</li>
+                            <li><strong>Anse ergonomique (Sweep) :</strong> Trajectoire courbe sur le plan Front + profil circulaire sur le plan Right.</li>
+                            <li><strong>Évidement (Shell) :</strong> Transformer le solide plein en tasse creuse avec une épaisseur uniforme de paroi.</li>
+                            <li><strong>Congés de finition (Fillet) :</strong> Lisser le raccordement de l'anse et adoucir la lèvre supérieure de dégustation.</li>
+                        </ul>
+                    </div>
+                    <a href="https://learn.onshape.com/learn/course/fundamentals-part-design-using-part-studios/creating-basic-part-features/exercise-coffee-cup?page=1" target="_blank" rel="noopener noreferrer" class="link-btn" style="background: #d97706;">
+                        <span>Ouvrir "Exercise: Coffee Cup"</span>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    </a>
+                </div>
+
+                <!-- Module 5 (NEW : Exercise Wheel Rim) -->
+                <div class="tuto-card">
+                    <span class="tuto-step-number" style="background: #7c3aed;">Activité 5 • ~35 min</span>
+                    <div class="tuto-content">
+                        <h3>Exercise: Wheel Rim (Roue / Jante)</h3>
+                        <p>Découvrez les fonctionnalités de conception industrielle : dépouilles de démoulage, coques et nervures de renfort.</p>
+                        <ul class="tuto-bullets">
+                            <li><strong>Moyeu et jante :</strong> Révolution du profil de base symétrique par rapport au plan médian.</li>
+                            <li><strong>Dépouille (Draft) :</strong> Incliner les faces intérieures (3° à 5°) pour respecter les contraintes de fonderie/moulage.</li>
+                            <li><strong>Évidement (Shell) :</strong> Supprimer la masse excessive tout en préservant la rigidité mécanique.</li>
+                            <li><strong>Nervures (Rib) & Répétition circulaire :</strong> Tracer une simple ligne d'esquisse de rayon et répéter à 360° (Circular Pattern).</li>
+                        </ul>
+                    </div>
+                    <a href="https://learn.onshape.com/learn/course/fundamentals-part-design-using-part-studios/creating-draft-shell-and-rib-features/exercise-wheel-rim?page=1" target="_blank" rel="noopener noreferrer" class="link-btn" style="background: #7c3aed;">
+                        <span>Ouvrir "Exercise: Wheel Rim"</span>
                         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                     </a>
                 </div>
@@ -966,9 +1118,33 @@
                             <li>Ajouter la fente oblongue centrale (entraxe <strong>24 mm</strong>, rayon <strong>R3 mm</strong>, alignée sur l'axe).</li>
                             <li>Vérifier que l'esquisse est <strong>entièrement noire</strong> (totalement contrainte), puis extruder (Extrude Solid) à une épaisseur de <strong>6 mm</strong>.</li>
                         </ol>
+                        <div class="cr-reminder">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                            Obligatoire : Capture d'écran de l'entonnoir + volume + masse à insérer dans le Docs Classroom !
+                        </div>
                     </div>
 
-                    <div class="verification-panel">
+                    <div class="cr-reminder" style="margin-bottom: 12px;">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                            Capture 3D + volume/masse à coller dans le Docs Classroom.
+                        </div>
+                        <div class="cr-reminder" style="margin-bottom: 12px;">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                            Capture 3D + volume/masse à coller dans le Docs Classroom.
+                        </div>
+                        <div class="cr-reminder" style="margin-bottom: 12px;">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                            Capture 3D + volume/masse à coller dans le Docs Classroom.
+                        </div>
+                        <div class="cr-reminder" style="margin-bottom: 12px;">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                            Capture 3D + volume/masse à coller dans le Docs Classroom.
+                        </div>
+                        <div class="cr-reminder" style="margin-bottom: 12px;">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                            Capture 3D + volume/masse à coller dans le Docs Classroom.
+                        </div>
+                        <div class="verification-panel">
                         <h4>
                             <svg width="18" height="18" fill="#10b981" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                             Autocontrôle du volume 3D
@@ -1081,6 +1257,10 @@
                             <li>Coter les largeurs : largeur totale <strong>16 mm</strong>, sommet de gorge <strong>8 mm</strong> et fond de gorge <strong>4 mm</strong> (symétrique).</li>
                             <li>Lancer l'outil <strong>Revolve</strong>, sélectionner la région fermée et l'axe pour une rotation à 360°.</li>
                         </ol>
+                        <div class="cr-reminder">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                            Obligatoire : Capture d'écran de l'entonnoir + volume + masse à insérer dans le Docs Classroom !
+                        </div>
                     </div>
 
                     <div class="verification-panel">
@@ -1192,6 +1372,10 @@
                             <li>Coter les diamètres au moyen de l'axe : <code>⌀12</code> (alésage), <code>⌀24</code> (moyeu), <code>⌀40</code> (corps).</li>
                             <li>Lancer <strong>Revolve</strong> à 360°.</li>
                         </ol>
+                        <div class="cr-reminder">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                            Obligatoire : Capture d'écran de l'entonnoir + volume + masse à insérer dans le Docs Classroom !
+                        </div>
                     </div>
 
                     <div class="verification-panel">
@@ -1262,6 +1446,10 @@
                             <li><strong>Perçages de la bride :</strong> Créer une esquisse sur la face avant de la collerette. Tracer un cercle de construction de diamètre <strong>⌀24 mm</strong>. Placer un cercle de <strong>⌀4,5 mm</strong> aligné verticalement. Extruder en enlèvement traversant (<em>Extrude Remove - Through all</em>). Utiliser <strong>Circular Pattern</strong> : 6 occurrences réparties sur 360°.</li>
                             <li><strong>Méplat en bout d'arbre :</strong> Esquisse sur le plan Top (ou d'extrémité). Retirer de la matière (<em>Extrude Remove</em>) sur une longueur borgne de <strong>10,4 mm</strong> depuis l'extrémité droite pour obtenir la cote sur plat de <strong>9,7 mm</strong> (profondeur 0,3 mm).</li>
                         </ol>
+                        <div class="cr-reminder">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                            Obligatoire : Capture d'écran de l'entonnoir + volume + masse à insérer dans le Docs Classroom !
+                        </div>
                     </div>
 
                     <div class="verification-panel">
@@ -1344,6 +1532,10 @@
                             <li><strong>Fraisage d'allègement (poche inférieure) :</strong> Sur la face inférieure, esquisser la découpe qui conserve l'extrémité droite sur <strong>30,92 mm</strong>. Extruder en enlèvement de matière (<em>Extrude Remove</em>) sur une profondeur de <strong>4,1 mm</strong> (épaisseur restante : 5,0 mm).</li>
                             <li><strong>Raccordements :</strong> Appliquer les congés de <strong>R1/4 in</strong> (soit <code>6,35 mm</code>) sur les transitions intérieures de l'usinage.</li>
                         </ol>
+                        <div class="cr-reminder">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                            Obligatoire : Capture d'écran de l'entonnoir + volume + masse à insérer dans le Docs Classroom !
+                        </div>
                     </div>
 
                     <div class="verification-panel">
@@ -1365,6 +1557,283 @@
                 </div>
             </div>
 
+            <!-- PIÈCE 6 : Tasse personnalisée (Design libre) -->
+            <div class="piece-box" id="piece-6">
+                <div class="piece-header">
+                    <h3>
+                        <span class="piece-num-badge" style="background:#d97706;">6</span>
+                        Pièce 6 : La Tasse Personnalisée à Anse Ergonomique (Design Libre)
+                    </h3>
+                    <span class="piece-level level-2" style="background:#fef3c7; color:#92400e;">Créativité & Design Libre • Révolution (Revolve) & Balayage (Sweep)</span>
+                </div>
+
+                <!-- Brief créatif sans dessin imposé -->
+                <div style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 1px solid #fde68a; border-radius: 12px; padding: 22px; margin-bottom: 22px;">
+                    <div style="display: flex; gap: 14px; align-items: flex-start;">
+                        <div style="color: #d97706; flex-shrink: 0; margin-top: 2px;">
+                            <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                        </div>
+                        <div>
+                            <h4 style="color: #92400e; font-size: 1.15rem; font-weight: 800; margin-bottom: 8px;">
+                                🎨 Défi Créatif : Imaginez & Modélisez Votre Propre Design de Tasse !
+                            </h4>
+                            <p style="color: #78350f; font-size: 0.95rem; line-height: 1.6; margin-bottom: 12px;">
+                                <strong>Aucun plan coté imposé pour cette pièce : vous êtes le designer !</strong> <br>
+                                Après avoir suivi l'exercice officiel <em>Coffee Cup</em>, créez un nouveau <em>Part Studio</em> et concevez une tasse originale qui répond aux besoins d'un utilisateur (mug de bureau, tasse à espresso élégante, bol ergonomique, mug isotherme...).
+                            </p>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 10px;">
+                                <div style="background: rgba(255,255,255,0.8); padding: 12px 14px; border-radius: 8px; border-left: 4px solid #d97706;">
+                                    <strong style="color: #92400e; font-size: 0.88rem;">1. Corps en Révolution (Revolve) :</strong>
+                                    <p style="font-size: 0.84rem; color: #451a03; margin: 4px 0 0 0;">Esquissez votre demi-profil fermé sur le plan Front (formes conique, galbée, tulipe, etc.) d'un seul côté de l'axe vertical.</p>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.8); padding: 12px 14px; border-radius: 8px; border-left: 4px solid #0e9f6e;">
+                                    <strong style="color: #14532d; font-size: 0.88rem;">2. Évidement Coque (Shell) :</strong>
+                                    <p style="font-size: 0.84rem; color: #14532d; margin: 4px 0 0 0;">Évidez la tasse en supprimant la face supérieure avec une épaisseur de paroi réaliste (2,5 à 4 mm).</p>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.8); padding: 12px 14px; border-radius: 8px; border-left: 4px solid #2563eb;">
+                                    <strong style="color: #1e40af; font-size: 0.88rem;">3. Anse Balayée (Sweep) :</strong>
+                                    <p style="font-size: 0.84rem; color: #1e40af; margin: 4px 0 0 0;">Dessinez une trajectoire ergonomique pour 2 ou 3 doigts, créez un profil normalisé contraint par coïncidence et balayez.</p>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.8); padding: 12px 14px; border-radius: 8px; border-left: 4px solid #7c3aed;">
+                                    <strong style="color: #5b21b6; font-size: 0.88rem;">4. Congés & Matériau :</strong>
+                                    <p style="font-size: 0.84rem; color: #5b21b6; margin: 4px 0 0 0;">Adoucissez le bord de la lèvre supérieure et les racines de l'anse. Assignez un matériau réaliste (Céramique, Porcelaine, Verre...).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instructions-grid">
+                    <div>
+                        <h4 style="font-weight:700; margin-bottom:6px; color:#1e293b;">Cahier des charges & Méthode recommandée :</h4>
+                        <ol class="steps-list">
+                            <li><strong>Nouveau Part Studio :</strong> Cliquez sur le <code>+</code> en bas à gauche > <em>Create Part Studio</em> et nommez l'onglet <code>Tasse_Design_Perso</code>.</li>
+                            <li><strong>Esquisse du corps (Front Plane) :</strong> Tracez l'axe vertical de construction passant par l'Origine. Dessinez le demi-profil fermé extérieur de votre tasse (hauteur typique entre 70 et 110 mm, diamètre de base 60 à 80 mm). Utilisez la fonction <strong>Revolve</strong> à 360°.</li>
+                            <li><strong>Fonction Coque (Shell) :</strong> Cliquez sur la face supérieure plane pour la supprimer et réglez l'épaisseur de paroi (ex: 3 mm).</li>
+                            <li><strong>Trajectoire de l'anse (Front Plane) :</strong> Dans une nouvelle esquisse, tracez la courbe de l'anse (arc par 3 points, spline ou segments raccordés par tangence).</li>
+                            <li><strong>Profil de l'anse (Right Plane) :</strong> Sur le plan perpendiculaire, dessinez le profil (cercle ⌀8 à ⌀12 mm ou ellipse). Imposez impérativement la contrainte <strong>Coincident</strong> ou <strong>Pierce</strong> entre le centre du profil et l'extrémité du chemin.</li>
+                            <li><strong>Balayage (Sweep) :</strong> Balayez le profil le long de la trajectoire en mode <strong>Add</strong> (fusionné avec le corps).</li>
+                            <li><strong>Finitions (Fillet) :</strong> Appliquez un congé adoucissant sur la lèvre supérieure et aux raccords de l'anse.</li>
+                        </ol>
+                        <div class="cr-reminder">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                            Obligatoire : Capture d'écran de votre tasse personnalisée + volume + masse à insérer dans le Docs Classroom !
+                        </div>
+                    </div>
+
+                    <div class="verification-panel">
+                        <h4>
+                            <svg width="18" height="18" fill="#10b981" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            Validation de votre conception personnalisée
+                        </h4>
+                        <div class="v-data">
+                            Entrez le volume mesuré dans Onshape avec l'outil <strong>Mass Properties</strong> (icône balance en bas à droite) :<br>
+                            Plage attendue : <code>50 000 mm³ à 300 000 mm³</code><br>
+                            Matière assignée : <em>Céramique, Porcelaine, Verre ou Inox</em>
+                        </div>
+                        <div class="check-input-group">
+                            <input type="number" class="check-input" id="input-vol-6" placeholder="Entrez votre volume en mm³">
+                            <button class="btn-check" onclick="checkCustomCup(6)">Valider</button>
+                        </div>
+                        <div class="feedback-msg" id="feedback-6"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Section 3 (NOUVEAU) : Grand Défi de Synthèse en Autonomie -->
+        <section class="card" id="defi-autonomie">
+            <div class="card-header" style="border-bottom-color: #f59e0b;">
+                <h2 class="card-title" style="color: #b45309;">
+                    <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+                    3. Grand Défi de Synthèse en Autonomie : L'Entonnoir Technique d'Atelier
+                </h2>
+                <span class="card-time-tag" style="background:#fef3c7; color:#92400e;">Défi Expert SI • Autonomie Totale</span>
+            </div>
+
+            <p style="margin-bottom: 20px; color: #475569;">
+                <strong>Mise en situation technologique :</strong> Lors du transvasement de fluide technique (huile, liquide de refroidissement) en atelier mécanique, un entonnoir ordinaire forme un bouchon étanche dans le goulot du réservoir. L'air ne pouvant s'échapper, il se produit un refoulement saccadé avec projections ("phénomène de glouglou"). <br>
+                <strong>Votre mission d'ingénierie :</strong> Modéliser l'entonnoir technique optimisé qui intègre <strong>4 nervures aérauliques extérieures</strong> (pour ménager des évents d'évacuation d'air), une <strong>poignée ergonomique balayée</strong> avec œillet de suspension, une <strong>coque uniforme</strong> et un <strong>embout d'écoulement biseauté à 45°</strong>.
+            </p>
+
+            <div class="assembly-callout" style="background: #fffbeb; border-left-color: #f59e0b;">
+                <div class="assembly-callout-icon" style="color: #d97706;">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                </div>
+                <p style="color: #78350f;">
+                    <strong>Synthèse des 5 compétences du cycle :</strong> Ce projet mobilise à lui seul l'ensemble des fonctionnalités professionnelles : <strong>1. Révolution</strong> (pavillon conique + fût) • <strong>2. Coque</strong> (épaisseur constante 2 mm) • <strong>3. Balayage</strong> (anse ergonomique sur plan normal) • <strong>4. Nervures</strong> (renforts aérauliques ouverts) • <strong>5. Répétition circulaire</strong> (4 nervures à 90°).
+                </p>
+            </div>
+
+            <!-- PIÈCE 8 -->
+            <div class="piece-box" id="piece-7">
+                <div class="piece-header">
+                    <h3>
+                        <span class="piece-num-badge" style="background:#b45309;">7</span>
+                        Pièce 7 : L'Entonnoir Technique à Anse Balayée & Nervures Aérauliques
+                    </h3>
+                    <span class="piece-level level-pro" style="background:#fef3c7; color:#92400e;">Défi de Synthèse en Autonomie (2nde SI & CIT)</span>
+                </div>
+
+                <div class="sketch-view-container">
+                    <div class="view-panel view-panel-full">
+                        <div class="view-panel-header">
+                            <span class="view-panel-title">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+                                Plan de Définition : Coupe Longitudinale AA & Vue de Dessous (Nervures)
+                            </span>
+                            <span class="view-tag" style="background:#fee2e2; color:#991b1b;">Polypropylène PP • Cotes en mm</span>
+                        </div>
+                        <svg viewBox="0 0 580 340" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <marker id="ar_funnel" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 2 L 10 5 L 0 8 z" fill="#0f172a"/>
+                                </marker>
+                            </defs>
+
+                            <rect width="580" height="340" fill="#f8fafc" rx="6" stroke="#e2e8f0"/>
+
+                            <!-- VUE GAUCHE : COUPE LONGITUDINALE AA -->
+                            <g transform="translate(200, 0)">
+                                <!-- Axe vertical -->
+                                <line x1="0" y1="20" x2="0" y2="310" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="14,3,4,3"/>
+                                <text x="5" y="30" font-family="'Consolas', monospace" font-size="10" font-weight="bold" fill="#dc2626">Axe (Revolve)</text>
+
+                                <!-- Demi-coupe du cône supérieur (r=50 en haut, r=12 en bas, H=75) -->
+                                <!-- Paroi gauche extérieure -->
+                                <line x1="-50" y1="45" x2="-10" y2="120" stroke="#1e3a8a" stroke-width="2.2"/>
+                                <!-- Fût cylindrique gauche (r=10, L=50) -->
+                                <line x1="-10" y1="120" x2="-10" y2="185" stroke="#1e3a8a" stroke-width="2.2"/>
+                                <!-- Biseau terminal 45° -->
+                                <line x1="-10" y1="185" x2="10" y2="205" stroke="#1e3a8a" stroke-width="2.2"/>
+                                <!-- Fût cylindrique droite -->
+                                <line x1="10" y1="205" x2="10" y2="120" stroke="#1e3a8a" stroke-width="2.2"/>
+                                <!-- Paroi droite extérieure -->
+                                <line x1="10" y1="120" x2="50" y2="45" stroke="#1e3a8a" stroke-width="2.2"/>
+                                <!-- Lèvre supérieure -->
+                                <line x1="-50" y1="45" x2="50" y2="45" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3"/>
+
+                                <!-- Paroi intérieure évidée (Shell 2 mm) -->
+                                <path d="M -48 45 L -8 120 L -8 187 L 8 203 L 8 120 L 48 45" fill="#bae6fd" fill-opacity="0.5" stroke="#0284c7" stroke-width="1.8"/>
+
+                                <!-- ANSE BALAYÉE (SWEEP) À GAUCHE -->
+                                <path d="M -49 60 C -105 60, -95 130, -18 125" fill="none" stroke="#ea580c" stroke-width="6" stroke-linecap="round"/>
+                                <circle cx="-75" cy="75" r="4" fill="#ffffff" stroke="#c2410c" stroke-width="1.5"/>
+                                <text x="-105" y="95" font-family="'Consolas', monospace" font-size="9" font-weight="bold" fill="#ea580c">Trou ⌀6</text>
+                                <text x="-125" y="60" font-family="'Consolas', monospace" font-size="9" font-weight="bold" fill="#ea580c">Anse ⌀8 (Sweep)</text>
+
+                                <!-- NERVURE AÉRAULIQUE VISIBLE SUR LE FÛT (Ép. 2.5 mm, saillie 3.5 mm) -->
+                                <polygon points="10,122 13.5,125 13.5,165 10,165" fill="#f59e0b" stroke="#b45309" stroke-width="1.2"/>
+                                <text x="18" y="145" font-family="'Consolas', monospace" font-size="9" font-weight="bold" fill="#b45309">Nervure Rib</text>
+
+                                <!-- COTATIONS -->
+                                <!-- Diamètre supérieur ⌀100 -->
+                                <line x1="-50" y1="45" x2="-50" y2="30" stroke="#94a3b8" stroke-width="1"/>
+                                <line x1="50" y1="45" x2="50" y2="30" stroke="#94a3b8" stroke-width="1"/>
+                                <line x1="-50" y1="36" x2="50" y2="36" stroke="#0f172a" stroke-width="1.2" marker-start="url(#ar_funnel)" marker-end="url(#ar_funnel)"/>
+                                <rect x="-18" y="28" width="36" height="15" fill="#ffffff"/>
+                                <text x="0" y="39" font-family="'Consolas', monospace" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">⌀100</text>
+
+                                <!-- Hauteur cône 75 mm -->
+                                <line x1="50" y1="45" x2="75" y2="45" stroke="#94a3b8" stroke-width="1"/>
+                                <line x1="10" y1="120" x2="75" y2="120" stroke="#94a3b8" stroke-width="1"/>
+                                <line x1="68" y1="45" x2="68" y2="120" stroke="#0f172a" stroke-width="1.2" marker-start="url(#ar_funnel)" marker-end="url(#ar_funnel)"/>
+                                <rect x="58" y="76" width="20" height="15" fill="#ffffff"/>
+                                <text x="68" y="87" font-family="'Consolas', monospace" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">75</text>
+
+                                <!-- Longueur fût 50 mm -->
+                                <line x1="10" y1="120" x2="75" y2="120" stroke="#94a3b8" stroke-width="1"/>
+                                <line x1="10" y1="185" x2="75" y2="185" stroke="#94a3b8" stroke-width="1"/>
+                                <line x1="68" y1="120" x2="68" y2="185" stroke="#0f172a" stroke-width="1.2" marker-start="url(#ar_funnel)" marker-end="url(#ar_funnel)"/>
+                                <rect x="58" y="146" width="20" height="15" fill="#ffffff"/>
+                                <text x="68" y="157" font-family="'Consolas', monospace" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">50</text>
+
+                                <!-- Diamètre fût extérieur ⌀20 et intérieur ⌀16 -->
+                                <line x1="-10" y1="185" x2="-10" y2="235" stroke="#94a3b8" stroke-width="1"/>
+                                <line x1="10" y1="205" x2="10" y2="235" stroke="#94a3b8" stroke-width="1"/>
+                                <line x1="-10" y1="228" x2="10" y2="228" stroke="#0f172a" stroke-width="1.2" marker-start="url(#ar_funnel)" marker-end="url(#ar_funnel)"/>
+                                <rect x="-14" y="220" width="28" height="15" fill="#ffffff"/>
+                                <text x="0" y="231" font-family="'Consolas', monospace" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">⌀20</text>
+
+                                <!-- Biseau 45° -->
+                                <text x="-25" y="200" font-family="'Consolas', monospace" font-size="10" font-weight="bold" fill="#0f172a">45°</text>
+                            </g>
+                            <text x="180" y="300" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="bold" fill="#334155" text-anchor="middle">Coupe Longitudinale AA (Cône, Fût biseauté & Anse)</text>
+
+                            <!-- VUE DROITE : VUE DE DESSOUS DES 4 NERVURES AÉRAULIQUES -->
+                            <g transform="translate(450, 160)">
+                                <!-- Axes orthogonaux -->
+                                <line x1="-65" y1="0" x2="65" y2="0" stroke="#dc2626" stroke-width="1.2" stroke-dasharray="8,2,2,2"/>
+                                <line x1="0" y1="-65" x2="0" y2="65" stroke="#dc2626" stroke-width="1.2" stroke-dasharray="8,2,2,2"/>
+
+                                <!-- Fût extérieur ⌀20 et intérieur ⌀16 -->
+                                <circle cx="0" cy="0" r="18" fill="#bae6fd" stroke="#0284c7" stroke-width="2"/>
+                                <circle cx="0" cy="0" r="14" fill="#ffffff" stroke="#0284c7" stroke-width="1.8"/>
+
+                                <!-- 4 NERVURES À 90° (Longueur 40, saillie 3.5 mm, épaisseur 2.5 mm) -->
+                                <!-- Droite (0°) -->
+                                <rect x="18" y="-2" width="7" height="4" fill="#f59e0b" stroke="#b45309" stroke-width="1.2" rx="1"/>
+                                <!-- Haut (90°) -->
+                                <rect x="-2" y="-25" width="4" height="7" fill="#f59e0b" stroke="#b45309" stroke-width="1.2" rx="1"/>
+                                <!-- Gauche (180°) -->
+                                <rect x="-25" y="-2" width="7" height="4" fill="#f59e0b" stroke="#b45309" stroke-width="1.2" rx="1"/>
+                                <!-- Bas (270°) -->
+                                <rect x="-2" y="18" width="4" height="7" fill="#f59e0b" stroke="#b45309" stroke-width="1.2" rx="1"/>
+
+                                <circle cx="0" cy="0" r="25" fill="none" stroke="#94a3b8" stroke-dasharray="2,2"/>
+                                <text x="0" y="4" font-family="'Consolas', monospace" font-size="8" font-weight="bold" fill="#0284c7" text-anchor="middle">⌀16</text>
+                            </g>
+                            <text x="450" y="240" font-family="'Consolas', monospace" font-size="10" font-weight="bold" fill="#b45309" text-anchor="middle">4x Nervures à 90° (Ép. 2.5 mm)</text>
+                            <text x="450" y="258" font-family="'Segoe UI', sans-serif" font-size="9" color="#64748b" text-anchor="middle">Évacuation d'air anti-glouglou</text>
+                            <text x="450" y="300" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="bold" fill="#334155" text-anchor="middle">Vue de Dessous (Fût & Évents)</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="instructions-grid">
+                    <div>
+                        <h4 style="font-weight:700; margin-bottom:6px; color:#1e293b;">Démarche de Conception en Autonomie :</h4>
+                        <ol class="steps-list">
+                            <li><strong>Révolution du corps plein (Revolve) :</strong> Sur le plan <strong>Front</strong>, esquisser le demi-profil fermé de l'entonnoir : ouverture supérieure <strong>⌀100 mm</strong> (R50 mm), raccordement conique à <strong>75 mm</strong> de hauteur (rayon R12 mm), et fût vertical de diamètre <strong>⌀20 mm</strong> (R10 mm) sur une longueur de <strong>50 mm</strong>. Révolution à 360° autour de l'axe vertical.</li>
+                            <li><strong>Coupe biseautée à 45° :</strong> Sur le plan <strong>Front</strong>, tracer une ligne inclinée à 45° traversant l'extrémité basse du fût. Effectuer un enlèvement de matière (<em>Extrude Remove</em>) pour biseauter la sortie d'écoulement.</li>
+                            <li><strong>Évidement (Shell) :</strong> Lancer l'outil <strong>Shell</strong>. Régler l'épaisseur de paroi uniforme à <strong>2,0 mm</strong>. Sélectionner les <strong>DEUX faces ouvertes à supprimer</strong> : la face supérieure du grand cône (⌀100) et la face inférieure biseautée (⌀20). Onshape vide instantanément l'intérieur !</li>
+                            <li><strong>Anse ergonomique de préhension (Sweep) :</strong>
+                                <ul style="margin: 4px 0 4px 16px; font-size: 0.88rem; color:#475569;">
+                                    <li>Trajectoire (Front) : Tracer un arc reliant le bord supérieur du cône au bas du cône, déport extérieur <strong>42 mm</strong>.</li>
+                                    <li>Profil (Plan normal ou Right) : Cercle <strong>⌀8 mm</strong> contraint par coïncidence à l'extrémité.</li>
+                                    <li>Lancer <strong>Sweep</strong> en mode <em>Add</em> pour fusionner l'anse au corps.</li>
+                                    <li>Ajouter un trou traversant de <strong>⌀6 mm</strong> dans le haut de l'anse pour l'accrochage d'atelier.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Nervures aérauliques extérieures (Rib) :</strong> Sur le plan <strong>Front</strong>, esquisser une simple ligne droite de <strong>40 mm</strong> de long, espacée de 3,5 mm le long du fût extérieur. Lancer l'outil <strong>Rib</strong>, épaisseur <strong>2,5 mm</strong> (centrée). Onshape prolonge automatiquement la matière jusqu'au fût et à la base du cône !</li>
+                            <li><strong>Répétition circulaire (Circular Pattern) :</strong> Sélectionner la fonction Nervure, choisir l'axe vertical central et définir <strong>4 occurrences réparties sur 360°</strong> (angle de 90°).</li>
+                            <li><strong>Congés de finition :</strong> Appliquer un congé de <strong>R2 mm</strong> aux raccords de l'anse et <strong>R1 mm</strong> aux arêtes des nervures.</li>
+                        </ol>
+                        <div class="cr-reminder">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                            Obligatoire : Capture d'écran de l'entonnoir + volume + masse à insérer dans le Docs Classroom !
+                        </div>
+                    </div>
+
+                    <div class="verification-panel">
+                        <h4>
+                            <svg width="18" height="18" fill="#10b981" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            Autocontrôle du volume 3D
+                        </h4>
+                        <div class="v-data">
+                            Matériau : <code>Polypropylène (PP) injecté</code> (densité 0,92 g/cm³)<br>
+                            Volume théorique : <code>40 658 mm³ (± 500 mm³)</code><br>
+                            Masse attendue : <code>~37,4 g</code>
+                        </div>
+                        <div class="check-input-group">
+                            <input type="number" class="check-input" id="input-vol-7" placeholder="Ex: 40658">
+                            <button class="btn-check" onclick="checkVolume(7, 40658, 500)">Valider</button>
+                        </div>
+                        <div class="feedback-msg" id="feedback-7"></div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Grille d'évaluation -->
@@ -1372,66 +1841,122 @@
             <div class="card-header">
                 <h2 class="card-title">
                     <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
-                    3. Bilan de la séance & Validation des compétences
+                    4. Bilan de la séance & Validation des compétences
                 </h2>
-                <span class="card-time-tag">Évaluation sur 20 points (Séance 3h)</span>
+                <span class="card-time-tag">Grille de Compétences & Barème Modulaire (30 pts)</span>
             </div>
 
             <table class="eval-table">
                 <thead>
                     <tr>
                         <th class="checkbox-cell">Fait</th>
-                        <th>Critères d'évaluation (Seconde Sciences de l'Ingénieur)</th>
+                        <th>Critères d'évaluation & Compétences visées (Seconde SI & CIT)</th>
                         <th style="width: 150px;">Validation</th>
                         <th style="width: 90px; text-align:center;">Barème</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- PARTIE 1 : TUTORIELS OFFICIELS -->
+                    <tr style="background:#f1f5f9; font-weight:bold;">
+                        <td colspan="4" style="color:#1e3a8a;">Partie 1 : Fondations & Tutoriels Officiels Onshape Learning Center</td>
+                    </tr>
                     <tr>
-                        <td class="checkbox-cell"><input type="checkbox" onchange="updateProgress()"></td>
-                        <td><strong>Activité 1 validée :</strong> Réalisation de l'exercice <em>Intermediate Sketching</em> (tangences, lignes noires).</td>
-                        <td>Acquis / Non acquis</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="check-eval-tuto-1" onchange="updateProgress()"></td>
+                        <td><strong>Activité 1 :</strong> <em>Intermediate Sketching</em> (relations géométriques, tangences, lignes noires contraintes).</td>
+                        <td>Fondamental</td>
                         <td style="text-align:center; font-weight:bold;">2 pts</td>
                     </tr>
                     <tr>
-                        <td class="checkbox-cell"><input type="checkbox" onchange="updateProgress()"></td>
-                        <td><strong>Activité 2 validée :</strong> Réalisation de l'exercice <em>Revolve</em> (axe de révolution, cotation au diamètre).</td>
-                        <td>Acquis / Non acquis</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="check-eval-tuto-2" onchange="updateProgress()"></td>
+                        <td><strong>Activité 2 :</strong> <em>Exercise: Revolve</em> (axe de révolution, demi-profil fermé, cotation au diamètre).</td>
+                        <td>Fondamental</td>
                         <td style="text-align:center; font-weight:bold;">2 pts</td>
                     </tr>
                     <tr>
-                        <td class="checkbox-cell"><input type="checkbox" onchange="updateProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="check-eval-tuto-3" onchange="updateProgress()"></td>
+                        <td><strong>Activité 3 :</strong> <em>Exercise: Sweep</em> (trajectoire chemin + profil normalisé, coïncidence et balayage).</td>
+                        <td>Fondamental</td>
+                        <td style="text-align:center; font-weight:bold;">2 pts</td>
+                    </tr>
+                    <tr>
+                        <td class="checkbox-cell"><input type="checkbox" id="check-eval-tuto-4" onchange="updateProgress()"></td>
+                        <td><strong>Activité 4 :</strong> <em>Exercise: Coffee Cup</em> (tasse complète associant révolution, balayage et coque).</td>
+                        <td>Approfondissement</td>
+                        <td style="text-align:center; font-weight:bold;">2 pts</td>
+                    </tr>
+                    <tr>
+                        <td class="checkbox-cell"><input type="checkbox" id="check-eval-tuto-5" onchange="updateProgress()"></td>
+                        <td><strong>Activité 5 :</strong> <em>Exercise: Wheel Rim</em> (roue avec dépouille de démoulage, coque et nervures circulaires).</td>
+                        <td>Approfondissement</td>
+                        <td style="text-align:center; font-weight:bold;">2 pts</td>
+                    </tr>
+
+                    <!-- PARTIE 2 : PIÈCES D'APPLICATION & DESIGN LIBRE -->
+                    <tr style="background:#f1f5f9; font-weight:bold;">
+                        <td colspan="4" style="color:#1e3a8a;">Partie 2 : Pièces d'application autonome sur plan technique & Design Libre</td>
+                    </tr>
+                    <tr>
+                        <td class="checkbox-cell"><input type="checkbox" id="check-eval-piece-1" onchange="updateProgress()"></td>
                         <td><strong>Pièce 1 (Manivelle) :</strong> Esquisse totalement contrainte, volume conforme (10 081 mm³ ±25).</td>
                         <td>Acquis / Non acquis</td>
-                        <td style="text-align:center; font-weight:bold;">3 pts</td>
+                        <td style="text-align:center; font-weight:bold;">2 pts</td>
                     </tr>
                     <tr>
-                        <td class="checkbox-cell"><input type="checkbox" onchange="updateProgress()"></td>
-                        <td><strong>Pièce 2 (Poulie) :</strong> Demi-profil fermé sur 1 seul côté de l'axe, volume conforme (23 692 mm³ ±35).</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="check-eval-piece-2" onchange="updateProgress()"></td>
+                        <td><strong>Pièce 2 (Poulie à gorge) :</strong> Demi-profil fermé sur 1 seul côté de l'axe, volume conforme (23 692 mm³ ±35).</td>
                         <td>Acquis / Non acquis</td>
-                        <td style="text-align:center; font-weight:bold;">3 pts</td>
+                        <td style="text-align:center; font-weight:bold;">2 pts</td>
                     </tr>
                     <tr>
-                        <td class="checkbox-cell"><input type="checkbox" onchange="updateProgress()"></td>
-                        <td><strong>Pièce 3 (Galet) :</strong> Révolution avec gorge circulaire R3, volume conforme (19 348 mm³ ±35).</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="check-eval-piece-3" onchange="updateProgress()"></td>
+                        <td><strong>Pièce 3 (Galet épaulé) :</strong> Révolution avec gorge circulaire R3, volume conforme (19 348 mm³ ±35).</td>
                         <td>Acquis / Non acquis</td>
-                        <td style="text-align:center; font-weight:bold;">3 pts</td>
+                        <td style="text-align:center; font-weight:bold;">2 pts</td>
                     </tr>
                     <tr>
-                        <td class="checkbox-cell"><input type="checkbox" onchange="updateProgress()"></td>
-                        <td><strong>Pièce 4 (Arbre à collerette) :</strong> Révolution multi-paliers, 6 perçages ⌀4,5 en répétition circulaire, méplat (16 196 mm³ ±40).</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="check-eval-piece-4" onchange="updateProgress()"></td>
+                        <td><strong>Pièce 4 (Arbre à collerette) :</strong> Révolution multi-paliers, répétition circulaire 6x ⌀4,5, méplat (16 196 mm³ ±40).</td>
                         <td>Approfondissement</td>
-                        <td style="text-align:center; font-weight:bold;">4 pts</td>
+                        <td style="text-align:center; font-weight:bold;">2 pts</td>
                     </tr>
                     <tr>
-                        <td class="checkbox-cell"><input type="checkbox" onchange="updateProgress()"></td>
-                        <td><strong>Pièce 5 (Bielle robotique HER) :</strong> Profil à 14°, 6 trous ⌀4,5 sur ⌀24, 2 alésages ⌀8, usinage d'allègement de 4,1 mm (19 750 mm³ ±500).</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="check-eval-piece-5" onchange="updateProgress()"></td>
+                        <td><strong>Pièce 5 (Bielle robotique HER) :</strong> Profil à 14°, perçages ⌀24, usinage d'allègement de 4,1 mm (19 750 mm³ ±500).</td>
                         <td>Défi d'application</td>
-                        <td style="text-align:center; font-weight:bold;">3 pts</td>
+                        <td style="text-align:center; font-weight:bold;">2 pts</td>
                     </tr>
+                    <tr>
+                        <td class="checkbox-cell"><input type="checkbox" id="check-eval-piece-6" onchange="updateProgress()"></td>
+                        <td><strong>Pièce 6 (Tasse Personnalisée - Design Libre) :</strong> Création originale intégrant Révolution, Coque, Anse balayée et Congés.</td>
+                        <td>Créativité & Maîtrise</td>
+                        <td style="text-align:center; font-weight:bold; color:#d97706;">3 pts</td>
+                    </tr>
+
+                    <!-- PARTIE 3 : GRAND DÉFI DE SYNTHÈSE EN AUTONOMIE -->
+                    <tr style="background:#fef3c7; font-weight:bold;">
+                        <td colspan="4" style="color:#b45309;">Partie 3 : Grand Défi de Synthèse en Autonomie Totale</td>
+                    </tr>
+                    <tr>
+                        <td class="checkbox-cell"><input type="checkbox" id="check-eval-piece-7" onchange="updateProgress()"></td>
+                        <td><strong>Pièce 7 (Entonnoir technique d'atelier) :</strong> Révolution cône/fût, biseau 45°, coque 2 mm, anse balayée ⌀8 avec œillet, 4 nervures aérauliques à 90° (40 658 mm³ ±500).</td>
+                        <td>Expert SI & CIT</td>
+                        <td style="text-align:center; font-weight:bold; color:#b45309;">4 pts</td>
+                    </tr>
+
+                    <!-- PARTIE 4 : COMPTE-RENDU DOCS CLASSROOM -->
+                    <tr style="background:#eff6ff; font-weight:bold;">
+                        <td colspan="4" style="color:#1d4ed8;">Partie 4 : Rendu Numérique & Compte-Rendu Google Docs (Classroom)</td>
+                    </tr>
+                    <tr>
+                        <td class="checkbox-cell"><input type="checkbox" id="check-eval-cr-docs" onchange="updateProgress()"></td>
+                        <td><strong>Compte-rendu Docs Classroom complet :</strong> Copie d'écran 3D pour TOUTES les conceptions (tutos 1 à 5, pièces 1 à 7) avec matériaux, volumes et masses annotés sous chaque image.</td>
+                        <td>Communication Technique</td>
+                        <td style="text-align:center; font-weight:bold; color:#1d4ed8;">3 pts</td>
+                    </tr>
+
                     <tr style="background:#f8fafc; font-weight:bold;">
                         <td colspan="3" style="text-align:right; padding-right:20px;">Total général :</td>
-                        <td style="text-align:center; color:#1e40af; font-size:1.1rem;">/ 20 pts</td>
+                        <td style="text-align:center; color:#1e40af; font-size:1.15rem;">/ 30 pts</td>
                     </tr>
                 </tbody>
             </table>
@@ -1449,6 +1974,28 @@
 
     <!-- Script de validation interactive et visionneuse -->
     <script>
+        function checkCustomCup(pieceId) {
+            const input = document.getElementById('input-vol-' + pieceId);
+            const feedback = document.getElementById('feedback-' + pieceId);
+            const val = parseFloat(input.value);
+
+            if (isNaN(val) || val <= 0) {
+                feedback.innerHTML = '<span style="color:#dc2626;">⚠️ Entrez la valeur numérique de votre volume mesuré dans Onshape !</span>';
+                return;
+            }
+
+            if (val < 20000 || val > 600000) {
+                feedback.innerHTML = `<span style="color:#d97706;">⚠️ Volume de ${val} mm³ atypique pour une tasse (habituellement entre 50 000 et 300 000 mm³). Vérifiez vos unités (mm) dans Onshape.</span>`;
+            } else {
+                feedback.innerHTML = `<span style="color:#059669;">✅ Superbe conception validée (${val} mm³) ! N'oubliez pas d'insérer votre capture 3D avec le panneau Mass Properties dans votre compte-rendu Docs Classroom.</span>`;
+            }
+
+            const cb = document.getElementById('check-eval-piece-' + pieceId);
+            if (cb) {
+                cb.checked = true;
+                updateProgress();
+            }
+        }
         function checkVolume(pieceId, target, tolerance) {
             const input = document.getElementById('input-vol-' + pieceId);
             const feedback = document.getElementById('feedback-' + pieceId);
