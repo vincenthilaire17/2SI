@@ -1,0 +1,2023 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Onshape Collaboratif - Conception Binôme & Assemblage (1h30)</title>
+    <style>
+        :root {
+            --primary: #1a56db;
+            --primary-dark: #1e429f;
+            --primary-light: #ebf5ff;
+            --secondary: #0e9f6e;
+            --secondary-light: #def7ec;
+            --accent: #d97706;
+            --accent-light: #fef3c7;
+            --danger: #dc2626;
+            --danger-light: #fee2e2;
+            --text-main: #1f2937;
+            --text-muted: #64748b;
+            --bg-page: #f1f5f9;
+            --bg-card: #ffffff;
+            --border: #cbd5e1;
+            --border-tech: #94a3b8;
+            --student-a: #1d4ed8;
+            --student-a-bg: #eff6ff;
+            --student-b: #059669;
+            --student-b-bg: #ecfdf5;
+            --font-sans: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            --font-mono: 'Consolas', 'Courier New', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 70px;
+        }
+
+        /* En-tête */
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #2563eb 100%);
+            color: white;
+            padding: 30px 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-title h1 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-title p {
+            font-size: 1.02rem;
+            opacity: 0.92;
+            margin-top: 6px;
+        }
+
+        .badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.16);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge-time {
+            background: #fbbf24;
+            color: #78350f;
+            border-color: #f59e0b;
+        }
+
+        .badge-mode {
+            background: #34d399;
+            color: #064e3b;
+            border-color: #10b981;
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 1240px;
+            margin: 25px auto;
+            padding: 0 20px;
+        }
+
+        /* Barre d'action et progression */
+        .action-bar {
+            background: white;
+            padding: 14px 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 15px;
+            z-index: 100;
+        }
+
+        .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .progress-bar-wrap {
+            width: 190px;
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2563eb, #10b981);
+            width: 0%;
+            transition: width 0.35s ease;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--text-main);
+            border: 1px solid var(--border-tech);
+        }
+        .btn-outline:hover {
+            background: #f8fafc;
+        }
+
+        /* Cartes de sections */
+        .card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            padding: 26px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 14px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-time-tag {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Grilles et colonnes Binôme */
+        .binome-roles-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 860px) {
+            .binome-roles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .role-card {
+            border-radius: 12px;
+            padding: 22px;
+            border: 2px solid;
+            position: relative;
+        }
+
+        .role-card-a {
+            background: var(--student-a-bg);
+            border-color: #93c5fd;
+        }
+
+        .role-card-b {
+            background: var(--student-b-bg);
+            border-color: #6ee7b7;
+        }
+
+        .role-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .role-badge-a {
+            background: #1e40af;
+            color: white;
+        }
+
+        .role-badge-b {
+            background: #065f46;
+            color: white;
+        }
+
+        .role-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #0f172a;
+        }
+
+        .role-parts-list {
+            list-style: none;
+            margin: 14px 0;
+        }
+
+        .role-parts-list li {
+            font-size: 0.92rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Callouts / Encadrés pédagogiques */
+        .callout {
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 18px 0;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .callout-info {
+            background: #eff6ff;
+            border-left: 5px solid #2563eb;
+            color: #1e3a8a;
+        }
+
+        .callout-warning {
+            background: #fffbeb;
+            border-left: 5px solid #d97706;
+            color: #92400e;
+        }
+
+        .callout-success {
+            background: #f0fdf4;
+            border-left: 5px solid #16a34a;
+            color: #14532d;
+        }
+
+        .callout-icon {
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .callout h4 {
+            font-size: 1rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .callout p {
+            font-size: 0.92rem;
+            line-height: 1.55;
+        }
+
+        /* Images guidées */
+        .guide-step {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 18px 0;
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 22px;
+            align-items: center;
+        }
+
+        @media (max-width: 860px) {
+            .guide-step {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .guide-img-container {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .guide-img-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #cbd5e1;
+        }
+
+        .guide-img-caption {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .guide-text h4 {
+            font-size: 1.1rem;
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .guide-text ol, .guide-text ul {
+            padding-left: 20px;
+            font-size: 0.92rem;
+        }
+
+        .guide-text li {
+            margin-bottom: 8px;
+        }
+
+        /* Tableau interactif Contrat d'interface */
+        .interface-table-wrap {
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        table.interface-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+            background: white;
+            text-align: left;
+        }
+
+        table.interface-table th {
+            background: #f8fafc;
+            color: #334155;
+            font-weight: 700;
+            padding: 12px 16px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        table.interface-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: middle;
+        }
+
+        table.interface-table tr:hover {
+            background: #f8fafc;
+        }
+
+        .input-param {
+            width: 80px;
+            padding: 6px 10px;
+            border: 1px solid #94a3b8;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .input-param:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .calculated-jeu {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        .jeu-ok {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .jeu-warn {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .jeu-danger {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        /* Cartes de modélisation de pièce */
+        .piece-box {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .piece-box-a {
+            border-top: 4px solid var(--student-a);
+        }
+
+        .piece-box-b {
+            border-top: 4px solid var(--student-b);
+        }
+
+        .piece-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 18px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 12px;
+        }
+
+        .piece-header h3 {
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .piece-num-badge {
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 0.92rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .badge-pa { background: var(--student-a); }
+        .badge-pb { background: var(--student-b); }
+
+        .sketch-layout {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 22px;
+            align-items: start;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 900px) {
+            .sketch-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .svg-drawing-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .svg-drawing-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            border-bottom: 1px dashed #cbd5e1;
+            padding-bottom: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .svg-drawing-card svg {
+            width: 100%;
+            max-width: 520px;
+            height: auto;
+            display: block;
+        }
+
+        .steps-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .steps-box h4 {
+            font-size: 1rem;
+            color: #0f172a;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .steps-box ol {
+            padding-left: 20px;
+            font-size: 0.92rem;
+            color: #334155;
+        }
+
+        .steps-box li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .key-action {
+            background: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: #1e293b;
+        }
+
+        .interface-highlight {
+            background: #fef08a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            color: #854d0e;
+        }
+
+        /* Grille évaluation */
+        .eval-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 15px;
+        }
+
+        .eval-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .eval-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1e3a8a;
+        }
+
+        .eval-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        /* Checkbox interactive list */
+        .check-step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 6px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            transition: background 0.2s;
+        }
+
+        .check-step-item:hover {
+            background: #f1f5f9;
+        }
+
+        .check-step-item input[type="checkbox"] {
+            margin-top: 4px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .check-step-label {
+            font-size: 0.9rem;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        /* Media Print */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 11pt;
+            }
+            .action-bar, .btn, .progress-indicator {
+                display: none !important;
+            }
+            header {
+                background: none;
+                color: black;
+                border-bottom: 2px solid #000;
+                padding: 10px 0;
+            }
+            .badge {
+                border: 1px solid #000;
+                color: black;
+                background: none;
+            }
+            .card, .piece-box {
+                box-shadow: none;
+                border: 1px solid #aaa;
+                page-break-inside: avoid;
+            }
+            .svg-drawing-card svg {
+                max-width: 440px;
+            }
+        }
+
+        /* Rendu 3D Global & Légende */
+        .system-render-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px;
+            margin: 22px 0;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 24px;
+            align-items: center;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+
+        @media (max-width: 900px) {
+            .system-render-card {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .system-render-img-wrap {
+            position: relative;
+            background: #ffffff;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            padding: 8px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        .system-render-img-wrap img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+            transition: transform 0.3s ease;
+        }
+
+        .system-render-img-wrap:hover img {
+            transform: scale(1.02);
+        }
+
+        .render-badge-3d {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            background: rgba(15, 23, 42, 0.85);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            backdrop-filter: blur(4px);
+        }
+
+        .part-legend-list {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .part-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 9px 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .part-legend-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .color-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 2px solid white;
+            box-shadow: 0 0 0 1px #cbd5e1;
+        }
+
+        .dot-socle { background: #1e3a8a; }
+        .dot-bras { background: #64748b; }
+        .dot-berceau { background: #059669; }
+        .dot-axe { background: #d97706; }
+
+        /* Cartes de rendu 3D des pièces individuelles */
+        .piece-3d-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            text-align: center;
+        }
+
+        .piece-3d-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #cbd5e1;
+            padding-bottom: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .piece-3d-card img {
+            width: 100%;
+            max-width: 460px;
+            height: auto;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            transition: transform 0.25s ease;
+        }
+
+        .piece-3d-card img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Cartes de mise en plan technique 3D cotée */
+        .plan-sheet-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            text-align: center;
+        }
+
+        .plan-sheet-card img {
+            width: 100%;
+            max-width: 540px;
+            height: auto;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            cursor: zoom-in;
+        }
+
+        .plan-sheet-card img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+
+        /* Visionneuse Modale Plein Écran pour les plans */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.88);
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            max-width: 95vw;
+            max-height: 94vh;
+            position: relative;
+            background: white;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .modal-box img {
+            max-width: 100%;
+            max-height: 86vh;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -14px;
+            right: -14px;
+            background: #dc2626;
+            color: white;
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            font-size: 20px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.1);
+        }
+
+        .zoom-hint-btn {
+            font-size: 0.78rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .dimension-badge-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-bottom: 14px;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .dimension-badge-table th {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 6px 10px;
+            font-weight: 700;
+            text-align: left;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .dimension-badge-table td {
+            padding: 6px 10px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #1e293b;
+        }
+
+        .dim-tag {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            display: inline-block;
+        }
+
+        .dim-normal {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        .dim-interface {
+            background: #fef08a;
+            color: #854d0e;
+            border: 1px solid #ca8a04;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- En-tête -->
+    <header>
+        <div class="header-container">
+            <div class="header-title">
+                <h1>
+                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    TP CAO Collaboratif Onshape : Projet « FlexDesk »
+                </h1>
+                <p>Ingénierie concourante en binôme : Création partagée, modélisation de 4 pièces, négociation des tolérances et assemblage cinématique</p>
+            </div>
+            <div class="badges">
+                <span class="badge badge-time">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+                    Durée : 1h30 (90 min)
+                </span>
+                <span class="badge badge-mode">Modalité : Binôme (2 élèves)</span>
+                <span class="badge">Niveau : 2nde SI / 1ère STI2D</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Barre d'outils et de suivi -->
+        <div class="action-bar">
+            <div class="progress-indicator">
+                <span>Progression du binôme :</span>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar-fill" id="global-progress"></div>
+                </div>
+                <span id="progress-percent">0%</span>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-outline" onclick="window.print()">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                    Imprimer la fiche TP
+                </button>
+                <a href="#contrat-interface" class="btn btn-primary">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                    Contrat d'Interface
+                </a>
+            </div>
+        </div>
+
+        <!-- Mise en situation & Objectifs -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    Mise en situation : Le Support Articulé de Smartphone « FlexDesk »
+                </div>
+                <span class="card-time-tag">Support d'étude</span>
+            </div>
+            <p style="font-size: 0.98rem; margin-bottom: 14px;">
+                Dans l'industrie moderne, les bureaux d'études ne travaillent plus en vase clos : plusieurs ingénieurs conçoivent <strong>simultanément</strong> les différents sous-ensembles d'un même produit sur une plateforme Cloud en temps réel.
+            </p>
+            <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 18px;">
+                <strong>Votre défi aujourd'hui :</strong> Vous formez une équipe de deux concepteurs. Vous devez concevoir et assembler sous Onshape un <strong>support de bureau inclinable pour smartphone</strong> composé de <strong>4 pièces complémentaires</strong>. Avant de modéliser, vous devrez impérativement négocier les <strong>dimensions d'interface</strong> (largeurs de chape, diamètres d'axe, jeux de fonctionnement) afin que vos pièces s'assemblent parfaitement sans bloquer ni flotter !
+            </p>
+
+            <!-- Aperçu 3D du Système Final Assemblé -->
+            <div class="system-render-card">
+                <div class="system-render-img-wrap">
+                    <span class="render-badge-3d">Vue CAO 3D Isométrique</span>
+                    <img src="img/flexdesk_assemblage_3d.jpg" alt="Rendu 3D du support de smartphone FlexDesk assemblé sous Onshape">
+                </div>
+                <div>
+                    <h3 style="color: #1e3a8a; font-size: 1.22rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                        <span>Modèle 3D Référent : « FlexDesk »</span>
+                    </h3>
+                    <p style="font-size: 0.91rem; color: #475569; margin-bottom: 12px;">
+                        Voici le système complet tel qu'il apparaîtra dans votre onglet <strong>Assembly 1</strong> une fois les 4 pièces modélisées et associées par leurs liaisons cinématiques :
+                    </p>
+                    <ul class="part-legend-list">
+                        <li class="part-legend-item">
+                            <span class="color-dot dot-socle"></span>
+                            <div>
+                                <strong>Pièce 1 : Socle lourd</strong> <span style="font-size: 0.8rem; color: var(--student-a); font-weight: 700;">(Élève A)</span><br>
+                                <span style="font-size: 0.78rem; color: var(--text-muted);">Embase avec double flasque de chape d'accueil</span>
+                            </div>
+                        </li>
+                        <li class="part-legend-item">
+                            <span class="color-dot dot-bras"></span>
+                            <div>
+                                <strong>Pièce 2 : Bras oscillant</strong> <span style="font-size: 0.8rem; color: var(--student-a); font-weight: 700;">(Élève A)</span><br>
+                                <span style="font-size: 0.78rem; color: var(--text-muted);">Bielle articulée pour ajuster la hauteur de vue</span>
+                            </div>
+                        </li>
+                        <li class="part-legend-item">
+                            <span class="color-dot dot-berceau"></span>
+                            <div>
+                                <strong>Pièce 3 : Berceau récepteur</strong> <span style="font-size: 0.8rem; color: var(--student-b); font-weight: 700;">(Élève B)</span><br>
+                                <span style="font-size: 0.78rem; color: var(--text-muted);">Plaque d'appui avec rebord et encoche de charge USB-C</span>
+                            </div>
+                        </li>
+                        <li class="part-legend-item">
+                            <span class="color-dot dot-axe"></span>
+                            <div>
+                                <strong>Pièce 4 : Axe moleté pivot</strong> <span style="font-size: 0.8rem; color: var(--student-b); font-weight: 700;">(Élève B)</span><br>
+                                <span style="font-size: 0.78rem; color: var(--text-muted);">Goupille épaulée moletée pour le guidage en rotation</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Répartition des rôles -->
+            <div class="binome-roles-grid">
+                <div class="role-card role-card-a">
+                    <span class="role-badge role-badge-a">Concepteur Élève A</span>
+                    <h3>Pôle Structure & Bras</h3>
+                    <p style="font-size: 0.88rem; color: #1e3a8a; margin-bottom: 10px;">Responsable de l'ancrage au sol et du guidage principal :</p>
+                    <ul class="role-parts-list">
+                        <li>
+                            <span class="piece-num-badge badge-pa">1</span>
+                            <strong>Pièce 1 : Le Socle lourd</strong> (embase de stabilité avec chape d'accueil)
+                        </li>
+                        <li>
+                            <span class="piece-num-badge badge-pa">2</span>
+                            <strong>Pièce 2 : Le Bras oscillant</strong> (colonne articulée intermédiaire)
+                        </li>
+                    </ul>
+                    <div style="font-size: 0.82rem; color: #1d4ed8; font-weight: 600; margin-top: 8px;">
+                        📌 Tâche clé : Créer le document Onshape et inviter l'Élève B en édition.
+                    </div>
+                </div>
+
+                <div class="role-card role-card-b">
+                    <span class="role-badge role-badge-b">Concepteur Élève B</span>
+                    <h3>Pôle Berceau & Articulation</h3>
+                    <p style="font-size: 0.88rem; color: #064e3b; margin-bottom: 10px;">Responsable de l'interface utilisateur et du pivotement :</p>
+                    <ul class="role-parts-list">
+                        <li>
+                            <span class="piece-num-badge badge-pb">3</span>
+                            <strong>Pièce 3 : Le Berceau support</strong> (maintien du smartphone + passage câble)
+                        </li>
+                        <li>
+                            <span class="piece-num-badge badge-pb">4</span>
+                            <strong>Pièce 4 : L'Axe moleté</strong> (broche de guidage et de blocage)
+                        </li>
+                    </ul>
+                    <div style="font-size: 0.82rem; color: #047857; font-weight: 600; margin-top: 8px;">
+                        📌 Tâche clé : Valider le partage, ouvrir le document et préparer l'Assemblage final.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Planning de la séance 1h30 -->
+            <div class="callout callout-info">
+                <div class="callout-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+                <div>
+                    <h4>Gestion du temps de séance (1h30 chrono) :</h4>
+                    <p>
+                        <strong>• 00 à 15 min :</strong> Étape 1 — Création et Partage collaboratif du document Onshape (droits <em>Can edit</em>).<br>
+                        <strong>• 15 à 30 min :</strong> Étape 2 — Négociation du Contrat d'Interface (cotes communes, tolérances et jeux).<br>
+                        <strong>• 30 à 65 min (35 min) :</strong> Étape 3 — Modélisation 3D synchrone des pièces (2 pièces chacun).<br>
+                        <strong>• 65 à 85 min (20 min) :</strong> Étape 4 — Assemblage collaboratif 3D (Assembly) & Test cinématique de pivotement.<br>
+                        <strong>• 85 à 90 min (5 min) :</strong> Étape 5 — Enregistrement, captures d'écran et auto-évaluation.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Étape 1 : Partage du Document -->
+        <div class="card" id="etape1">
+            <div class="card-header">
+                <div class="card-title">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+                    Étape 1 : Création & Partage Collaboratif du Document Onshape
+                </div>
+                <span class="card-time-tag">⏱ 15 minutes</span>
+            </div>
+
+            <p style="margin-bottom: 16px;">
+                Contrairement aux logiciels de CAO traditionnels installés sur un disque dur, <strong>Onshape est 100% Cloud</strong>. Un seul document accueille les deux élèves en direct, sans jamais écraser le travail de l'autre !
+            </p>
+
+            <!-- Guide illustré Image 1 -->
+            <div class="guide-step">
+                <div class="guide-text">
+                    <h4>Action 1 : Accéder à la fonction de partage (Élève A)</h4>
+                    <p style="margin-bottom: 10px;">
+                        L'<strong>Élève A</strong> se connecte à son compte Onshape et clique sur <strong>Create &gt; Document</strong>. Nommez le document : <br>
+                        <code style="background: #e2e8f0; padding: 3px 8px; border-radius: 4px; font-weight: 700; color: #1e3a8a;">TP_Collab_FlexDesk_NomA_NomB</code>.
+                    </p>
+                    <p style="margin-bottom: 10px;">Vous disposez de deux méthodes pour ouvrir la fenêtre de partage :</p>
+                    <ol>
+                        <li><strong>Depuis la page d'accueil (Documents) :</strong> Cliquez sur l'icône <strong>Partager</strong> (trois points reliés) située à droite de la ligne du document dans la liste.</li>
+                        <li><strong>Directement dans l'espace de modélisation :</strong> Cliquez sur le gros bouton bleu <strong>Partager (Share)</strong> situé en haut à droite de la barre d'outils supérieure.</li>
+                    </ol>
+                </div>
+                <div class="guide-img-container">
+                    <img src="img/onshape_partager_bouton.png" alt="Accès au bouton de partage dans Onshape">
+                    <div class="guide-img-caption">Figure 1 : Emplacement du bouton Partager dans la liste des documents et dans la barre d'outils.</div>
+                </div>
+            </div>
+
+            <!-- Guide illustré Image 2 -->
+            <div class="guide-step">
+                <div class="guide-text">
+                    <h4>Action 2 : Configurer les permissions d'édition pour l'Élève B</h4>
+                    <p style="margin-bottom: 10px;">
+                        Dans la fenêtre pop-up de partage qui apparaît à l'écran :
+                    </p>
+                    <ol>
+                        <li>Sélectionnez l'onglet <strong>Individuals</strong> (Individus).</li>
+                        <li>Dans le champ <em>Search names or emails</em>, saisissez l'<strong>adresse e-mail Onshape de l'Élève B</strong>.</li>
+                        <li>Dans la liste déroulante des permissions, vérifiez que le statut est bien réglé sur <strong style="color: #1e40af;">Can edit</strong> (Peut modifier).</li>
+                        <li>Conservez les autorisations cochées (Copy, Export, Share, Comment).</li>
+                        <li>Cliquez sur le bouton bleu <strong>Share</strong> (Partager), puis fermez avec la croix ou <em>Close</em>.</li>
+                    </ol>
+                    <div class="callout callout-warning" style="margin-top: 12px; padding: 10px 14px;">
+                        <div class="callout-icon">⚠️</div>
+                        <p style="font-size: 0.85rem;">
+                            <strong>Attention :</strong> Si vous laissez l'option par défaut <em>Can view</em> (Lecture seule), votre camarade ne pourra pas créer de pièces ! Assurez-vous d'avoir sélectionné <strong>Can edit</strong>.
+                        </p>
+                    </div>
+                </div>
+                <div class="guide-img-container">
+                    <img src="img/onshape_partager_droits.png" alt="Fenêtre de configuration du partage dans Onshape">
+                    <div class="guide-img-caption">Figure 2 : Saisie de l'e-mail du binôme et attribution du rôle « Can edit ».</div>
+                </div>
+            </div>
+
+            <!-- Validation du partage -->
+            <div class="callout callout-success">
+                <div class="callout-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </div>
+                <div>
+                    <h4>Test de synchronisation Cloud (Le "Ping Collaboratif") :</h4>
+                    <p>
+                        L'<strong>Élève B</strong> rafraîchit sa page d'accueil Onshape, clique sur la rubrique <em>Shared with me</em> (Partagés avec moi) et ouvre le document. <br>
+                        👉 Observez en haut à droite : <strong>les deux avatars (pastilles de couleur) des élèves apparaissent côte à côte</strong>. Si l'un sélectionne une face, l'autre la voit s'illuminer en direct sur son propre écran !
+                    </p>
+                </div>
+            </div>
+
+            <!-- Checkbox Étape 1 -->
+            <div class="check-step-item">
+                <input type="checkbox" id="check-step-1" onchange="updateProgress()">
+                <label for="check-step-1" class="check-step-label">
+                    <strong>Validation Étape 1 :</strong> Le document est partagé, les deux élèves sont connectés en simultané avec les droits <em>Can edit</em>.
+                </label>
+            </div>
+        </div>
+
+        <!-- Étape 2 : Le Contrat d'Interface -->
+        <div class="card" id="contrat-interface">
+            <div class="card-header">
+                <div class="card-title">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    Étape 2 : Le « Contrat d'Interface » & Négociation des Cotes
+                </div>
+                <span class="card-time-tag">⏱ 15 minutes</span>
+            </div>
+
+            <p style="margin-bottom: 14px;">
+                <strong>Règle d'or de l'ingénierie concourante :</strong> On ne lance <strong>JAMAIS</strong> une modélisation 3D sans s'être mis d'accord sur les <strong>zones de contact</strong> entre les pièces. <br>
+                En fabrication réelle (ex: impression 3D FDM ou injection plastique), si un tenon de 15 mm entre dans une rainure de 15 mm pile, <em>les pièces ne s'emboîteront pas</em> à cause des tolérances de fabrication. Il faut prévoir un <strong>Jeu Fonctionnel</strong> (\(J = \text{Dimension Alésage} - \text{Dimension Arbre}\)).
+            </p>
+
+            <div class="callout callout-warning">
+                <div class="callout-icon">💡</div>
+                <div>
+                    <h4>Règles de jeu recommandées pour ce TP (Impression 3D / Montage aisé) :</h4>
+                    <p>
+                        • <strong>Jeu latéral de chape (Liaison Pivot 1 et 2) :</strong> Prévoir un jeu entre <strong>0,4 mm et 0,6 mm</strong> (ex : bras de 16,0 mm dans chape de 16,5 mm).<br>
+                        • <strong>Jeu diamétral de l'axe de rotation :</strong> Prévoir un jeu entre <strong>0,3 mm et 0,5 mm</strong> entre l'axe et les alésages de passage (ex : axe de Ø7,8 mm dans alésage de Ø8,2 mm).
+                    </p>
+                </div>
+            </div>
+
+            <!-- Simulateur / Tableau Interactif du Contrat d'Interface -->
+            <h4 style="margin: 18px 0 10px 0; color: #1e3a8a;">Tableau de négociation des cotes d'interface (Remplissez ensemble les cases jaunes) :</h4>
+            
+            <div class="interface-table-wrap">
+                <table class="interface-table">
+                    <thead>
+                        <tr>
+                            <th>Interface mécanique</th>
+                            <th>Concepteur Élève A</th>
+                            <th>Concepteur Élève B</th>
+                            <th>Jeu calculé (J)</th>
+                            <th>Diagnostic de compatibilité</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>1. Chape Socle / Pied Bras</strong><br>
+                                <span style="font-size: 0.8rem; color: var(--text-muted);">Emboîtement pivot inférieur</span>
+                            </td>
+                            <td>
+                                Largeur Chape Socle (\(L_{chape}\)) :<br>
+                                <input type="number" step="0.1" class="input-param" id="param-l-chape" value="16.6" oninput="calculateClearances()"> mm
+                            </td>
+                            <td>
+                                Épaisseur Pied Bras (\(E_{bras}\)) :<br>
+                                <input type="number" step="0.1" class="input-param" id="param-e-bras" value="16.0" oninput="calculateClearances()"> mm
+                            </td>
+                            <td>
+                                <span class="calculated-jeu" id="disp-jeu-1">J = 0.6 mm</span>
+                            </td>
+                            <td id="diag-jeu-1">
+                                <span style="color: #15803d; font-weight: 700;">✅ Excellent (Jeu fonctionnel optimal)</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>2. Axe moleté / Alésages</strong><br>
+                                <span style="font-size: 0.8rem; color: var(--text-muted);">Guidage en rotation</span>
+                            </td>
+                            <td>
+                                Diamètre Alésage Socle & Bras :<br>
+                                <input type="number" step="0.1" class="input-param" id="param-d-trou" value="8.2" oninput="calculateClearances()"> mm
+                            </td>
+                            <td>
+                                Diamètre tige de l'Axe (\(D_{axe}\)) :<br>
+                                <input type="number" step="0.1" class="input-param" id="param-d-axe" value="7.8" oninput="calculateClearances()"> mm
+                            </td>
+                            <td>
+                                <span class="calculated-jeu" id="disp-jeu-2">J = 0.4 mm</span>
+                            </td>
+                            <td id="diag-jeu-2">
+                                <span style="color: #15803d; font-weight: 700;">✅ Excellent (Rotation fluide garantie)</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>3. Tête de Bras / Berceau</strong><br>
+                                <span style="font-size: 0.8rem; color: var(--text-muted);">Liaison articulée haute</span>
+                            </td>
+                            <td>
+                                Épaisseur Tête de Bras (\(E_{tete}\)) :<br>
+                                <input type="number" step="0.1" class="input-param" id="param-e-tete" value="12.0" oninput="calculateClearances()"> mm
+                            </td>
+                            <td>
+                                Écartement Chape Berceau (\(L_{berceau}\)) :<br>
+                                <input type="number" step="0.1" class="input-param" id="param-l-berceau" value="12.5" oninput="calculateClearances()"> mm
+                            </td>
+                            <td>
+                                <span class="calculated-jeu" id="disp-jeu-3">J = 0.5 mm</span>
+                            </td>
+                            <td id="diag-jeu-3">
+                                <span style="color: #15803d; font-weight: 700;">✅ Excellent (Emboîtement sans forcer)</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>4. Logement smartphone</strong><br>
+                                <span style="font-size: 0.8rem; color: var(--text-muted);">Ergonomie d'accueil</span>
+                            </td>
+                            <td colspan="2">
+                                Accord sur le smartphone cible : Épaisseur smartphone avec coque = <strong>12 mm</strong> | Largeur passage câble USB-C = <strong>16 mm</strong>
+                            </td>
+                            <td colspan="2" style="font-size: 0.85rem; color: #1e40af;">
+                                Intégré dans le design du berceau (Élève B)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Checkbox Étape 2 -->
+            <div class="check-step-item">
+                <input type="checkbox" id="check-step-2" onchange="updateProgress()">
+                <label for="check-step-2" class="check-step-label">
+                    <strong>Validation Étape 2 :</strong> Les cotes d'interface sont calculées, vérifiées dans le tableau et validées d'un commun accord par les deux élèves.
+                </label>
+            </div>
+        </div>
+
+        <!-- Étape 3 : Modélisation 3D Parallèle -->
+        <div class="card" id="etape3">
+            <div class="card-header">
+                <div class="card-title">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                    Étape 3 : Modélisation 3D Synchrone des 4 Pièces (2 pièces chacun)
+                </div>
+                <span class="card-time-tag">⏱ 35 minutes</span>
+            </div>
+
+            <p style="margin-bottom: 20px;">
+                Dans Onshape, pour travailler à deux sans interférer sur l'historique des fonctions :<br>
+                • <strong>Élève A</strong> travaille dans l'onglet initial <code>Part Studio 1</code> (rebaptisé <em>Part Studio - Structure</em>).<br>
+                • <strong>Élève B</strong> clique sur le bouton <strong>+</strong> en bas à gauche et choisit <strong>Create Part Studio</strong> (nommé <em>Part Studio - Berceau et Axe</em>).
+            </p>
+
+            <!-- ============================================== -->
+            <!-- ZONE ELEVE A : PIECE 1 & PIECE 2 -->
+            <!-- ============================================== -->
+            <div class="piece-box piece-box-a">
+                <div class="piece-header">
+                    <h3>
+                        <span class="piece-num-badge badge-pa">1</span>
+                        <span>Pièce 1 : Le Socle lourd (Concepteur Élève A)</span>
+                    </h3>
+                    <span style="font-size: 0.85rem; font-weight: 700; color: var(--student-a);">Part Studio 1</span>
+                </div>
+
+                <div class="sketch-layout">
+                    <!-- Colonne Visuelle Gauche : Rendu 3D + Plan Coté -->
+                    <div style="display: flex; flex-direction: column; gap: 14px;">
+                        <!-- Rendu 3D Isométrique Pièce 1 -->
+                        <div class="piece-3d-card">
+                            <div class="piece-3d-card-header">
+                                <span>Aperçu 3D Isométrique (Objectif Visuel)</span>
+                                <span class="view-tag" style="background: var(--student-a-bg); color: var(--student-a); font-weight: 700;">PIÈCE 1 FINIE</span>
+                            </div>
+                            <img src="img/flexdesk_piece1_socle_3d.jpg" alt="Rendu 3D Pièce 1 : Socle lourd">
+                        </div>
+
+                        <!-- Mise en Plan Technique Cotée Référente -->
+                        <div class="plan-sheet-card">
+                            <div class="piece-3d-card-header">
+                                <span>Mise en Plan CAO Cotée (Vues Orthogonales & Isométrique)</span>
+                                <span class="view-tag" style="background: #e2e8f0; color: #1e293b; font-weight: 700;">NORME ISO CAO</span>
+                            </div>
+                            <img src="img/flexdesk_plan_3d_piece1_socle.jpg" alt="Plan technique 3D coté Pièce 1 : Socle lourd">
+                        </div>
+                    </div>
+
+                    <!-- Instructions de modélisation Socle -->
+                    <div class="steps-box">
+                        <h4>
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                            Démarche pas-à-pas Onshape (Élève A) :
+                        </h4>
+
+                        <!-- Tableau synthétique des cotes fonctionnelles -->
+                        <table class="dimension-badge-table">
+                            <thead>
+                                <tr>
+                                    <th>Élément géométrique</th>
+                                    <th>Cote nominale</th>
+                                    <th>Caractère de la cote</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Embase rectangulaire</td>
+                                    <td><span class="dim-tag dim-normal">110 × 85 mm</span> / Ep = <span class="dim-tag dim-normal">12 mm</span></td>
+                                    <td>Bâti fixe de référence</td>
+                                </tr>
+                                <tr>
+                                    <td>Écartement chape (\(L_{chape}\))</td>
+                                    <td><span class="dim-tag dim-interface">16,6 mm</span> (H = 35 mm)</td>
+                                    <td>Cote négociée (Jeu latéral \(J_1 = 0,6\) mm)</td>
+                                </tr>
+                                <tr>
+                                    <td>Alésages de passage axe</td>
+                                    <td><span class="dim-tag dim-interface">Ø 8,2 mm</span> (à H = 25 mm)</td>
+                                    <td>Cote négociée (Jeu diamétral \(J_2 = 0,4\) mm)</td>
+                                </tr>
+                                <tr>
+                                    <td>Rayons de raccordement</td>
+                                    <td><span class="dim-tag dim-normal">R = 3 mm</span></td>
+                                    <td>Congés d'adoucissement</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <ol>
+                            <li>Créez une esquisse sur le plan <span class="key-action">Top</span> : tracez un rectangle par son centre de <strong>110 mm × 85 mm</strong>.</li>
+                            <li>Appliquez une <span class="key-action">Extrude</span> de <strong>12 mm</strong> vers le haut.</li>
+                            <li>Sélectionnez la face supérieure, tracez l'esquisse de la chape (deux rectangles verticaux de largeur 7 mm chacun, espacés de la cote négociée <span class="interface-highlight">L_chape (ex: 16,6 mm)</span>).</li>
+                            <li>Extrudez la chape de <strong>35 mm</strong> en mode <em>Add</em>.</li>
+                            <li>Sur la face latérale extérieure de la chape, placez un point d'esquisse centré à <strong>25 mm</strong> au-dessus de l'embase, puis utilisez l'outil <span class="key-action">Hole</span> (ou cercle extrudé en <em>Remove</em>) de diamètre <span class="interface-highlight">Ø alésage (ex: 8,2 mm)</span> traversant les deux oreilles de chape.</li>
+                            <li>Ajoutez des congés <span class="key-action">Fillet</span> de <strong>3 mm</strong> sur les arêtes pour adoucir le design.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIECE 2 : LE BRAS OSCILLANT (ELEVE A) -->
+            <div class="piece-box piece-box-a">
+                <div class="piece-header">
+                    <h3>
+                        <span class="piece-num-badge badge-pa">2</span>
+                        <span>Pièce 2 : Le Bras oscillant intermédiaire (Concepteur Élève A)</span>
+                    </h3>
+                    <span style="font-size: 0.85rem; font-weight: 700; color: var(--student-a);">Part Studio 1</span>
+                </div>
+
+                <div class="sketch-layout">
+                    <!-- Colonne Visuelle Gauche : Rendu 3D + Plan Coté -->
+                    <div style="display: flex; flex-direction: column; gap: 14px;">
+                        <!-- Rendu 3D Isométrique Pièce 2 -->
+                        <div class="piece-3d-card">
+                            <div class="piece-3d-card-header">
+                                <span>Aperçu 3D Isométrique (Objectif Visuel)</span>
+                                <span class="view-tag" style="background: var(--student-a-bg); color: var(--student-a); font-weight: 700;">PIÈCE 2 FINIE</span>
+                            </div>
+                            <img src="img/flexdesk_piece2_bras_3d.jpg" alt="Rendu 3D Pièce 2 : Bras oscillant">
+                        </div>
+
+                        <!-- Mise en Plan Technique Cotée Référente -->
+                        <div class="plan-sheet-card">
+                            <div class="piece-3d-card-header">
+                                <span>Mise en Plan CAO Cotée (Vues Orthogonales & Isométrique)</span>
+                                <span class="view-tag" style="background: #e2e8f0; color: #1e293b; font-weight: 700;">NORME ISO CAO</span>
+                            </div>
+                            <img src="img/flexdesk_plan_3d_piece2_bras.jpg" alt="Plan technique 3D coté Pièce 2 : Bras oscillant">
+                        </div>
+                    </div>
+
+                    <!-- Instructions de modélisation Bras -->
+                    <div class="steps-box">
+                        <h4>
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                            Démarche pas-à-pas Onshape (Élève A) :
+                        </h4>
+
+                        <!-- Tableau synthétique des cotes fonctionnelles -->
+                        <table class="dimension-badge-table">
+                            <thead>
+                                <tr>
+                                    <th>Élément géométrique</th>
+                                    <th>Cote nominale</th>
+                                    <th>Caractère de la cote</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Entraxe de bielle</td>
+                                    <td><span class="dim-tag dim-normal">100 mm</span></td>
+                                    <td>Distance cinématique de levage</td>
+                                </tr>
+                                <tr>
+                                    <td>Pied inférieur (\(E_{bras}\))</td>
+                                    <td><span class="dim-tag dim-interface">16,0 mm</span> / Alésage <span class="dim-tag dim-interface">Ø 8,2 mm</span></td>
+                                    <td>Cotes négociées (Chape Socle)</td>
+                                </tr>
+                                <tr>
+                                    <td>Tête supérieure (\(E_{tete}\))</td>
+                                    <td><span class="dim-tag dim-interface">12,0 mm</span> / Alésage <span class="dim-tag dim-interface">Ø 6,2 mm</span></td>
+                                    <td>Cotes négociées (Chape Berceau)</td>
+                                </tr>
+                                <tr>
+                                    <td>Corps profilé & évidement</td>
+                                    <td>Largeur corps <span class="dim-tag dim-normal">20 mm</span> / Évidement central</td>
+                                    <td>Design & allègement matière</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <ol>
+                            <li>Toujours dans le même <em>Part Studio 1</em>, créez une esquisse sur le plan <span class="key-action">Front</span>.</li>
+                            <li>Tracez deux cercles distants d'un entraxe de <strong>100 mm</strong> (Cercle 1 en bas à l'origine : Ø32 mm externe / Cercle 2 en haut : Ø24 mm externe).</li>
+                            <li>Reliez les deux cercles par des lignes tangentes pour former le corps de bielle.</li>
+                            <li>Extrudez en mode <strong>Symmetric</strong> avec la largeur négociée <span class="interface-highlight">Ep_bras (ex: 16,0 mm)</span>. Veillez à cocher <strong>New</strong> pour créer une 2ème pièce indépendante (<em>Part 2</em>).</li>
+                            <li>Percez le trou bas avec le même diamètre que le socle <span class="interface-highlight">Ø alésage (ex: 8,2 mm)</span>.</li>
+                            <li>En tête haute, effectuez un usinage ou réglez l'épaisseur sur <span class="interface-highlight">Ep_tete (ex: 12,0 mm)</span> avec un perçage supérieur de Ø6 mm ou Ø8 mm.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================== -->
+            <!-- ZONE ELEVE B : PIECE 3 & PIECE 4 -->
+            <!-- ============================================== -->
+            <div class="piece-box piece-box-b">
+                <div class="piece-header">
+                    <h3>
+                        <span class="piece-num-badge badge-pb">3</span>
+                        <span>Pièce 3 : Le Berceau support récepteur (Concepteur Élève B)</span>
+                    </h3>
+                    <span style="font-size: 0.85rem; font-weight: 700; color: var(--student-b);">Part Studio 2</span>
+                </div>
+
+                <div class="sketch-layout">
+                    <!-- Colonne Visuelle Gauche : Rendu 3D + Plan Coté -->
+                    <div style="display: flex; flex-direction: column; gap: 14px;">
+                        <!-- Rendu 3D Isométrique Pièce 3 -->
+                        <div class="piece-3d-card">
+                            <div class="piece-3d-card-header">
+                                <span>Aperçu 3D Isométrique (Objectif Visuel)</span>
+                                <span class="view-tag" style="background: var(--student-b-bg); color: var(--student-b); font-weight: 700;">PIÈCE 3 FINIE</span>
+                            </div>
+                            <img src="img/flexdesk_piece3_berceau_3d.jpg" alt="Rendu 3D Pièce 3 : Berceau récepteur">
+                        </div>
+
+                        <!-- Mise en Plan Technique Cotée Référente -->
+                        <div class="plan-sheet-card">
+                            <div class="piece-3d-card-header">
+                                <span>Mise en Plan CAO Cotée (Vues Orthogonales & Isométrique)</span>
+                                <span class="view-tag" style="background: #e2e8f0; color: #1e293b; font-weight: 700;">NORME ISO CAO</span>
+                            </div>
+                            <img src="img/flexdesk_plan_3d_piece3_berceau.jpg" alt="Plan technique 3D coté Pièce 3 : Berceau récepteur">
+                        </div>
+                    </div>
+
+                    <!-- Instructions de modélisation Berceau -->
+                    <div class="steps-box">
+                        <h4>
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                            Démarche pas-à-pas Onshape (Élève B) :
+                        </h4>
+
+                        <!-- Tableau synthétique des cotes fonctionnelles -->
+                        <table class="dimension-badge-table">
+                            <thead>
+                                <tr>
+                                    <th>Élément géométrique</th>
+                                    <th>Cote nominale</th>
+                                    <th>Caractère de la cote</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Dossier récepteur</td>
+                                    <td><span class="dim-tag dim-normal">H = 90 mm</span> / Largeur <span class="dim-tag dim-normal">75 mm</span> / Ep = <span class="dim-tag dim-normal">3,5 mm</span></td>
+                                    <td>Appui dorsal du téléphone</td>
+                                </tr>
+                                <tr>
+                                    <td>Logement smartphone</td>
+                                    <td>Profondeur <span class="dim-tag dim-normal">14 mm</span> / Butée <span class="dim-tag dim-normal">12 mm</span></td>
+                                    <td>Maintien de smartphones avec coque</td>
+                                </tr>
+                                <tr>
+                                    <td>Passage câble de recharge</td>
+                                    <td><span class="dim-tag dim-normal">16 × 25 mm</span> (centré)</td>
+                                    <td>Dégagement connecteur USB-C</td>
+                                </tr>
+                                <tr>
+                                    <td>Chape arrière (\(L_{berceau}\))</td>
+                                    <td><span class="dim-tag dim-interface">12,5 mm</span> / Alésage <span class="dim-tag dim-interface">Ø 6,2 mm</span></td>
+                                    <td>Cotes négociées (Jeu \(J_3 = 0,5\) mm)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <ol>
+                            <li>Dans le nouvel onglet <em>Part Studio 2</em>, créez une esquisse sur le plan <span class="key-action">Right</span>.</li>
+                            <li>Dessinez le profil en « L » du berceau : dossier de <strong>90 mm</strong> de haut, épaisseur de paroi <strong>3,5 mm</strong>, base d'accueil de <strong>18 mm</strong> et rebord frontal de <strong>12 mm</strong>.</li>
+                            <li>Appliquez une <span class="key-action">Extrude</span> symétrique de largeur <strong>75 mm</strong>.</li>
+                            <li>Sur la face d'appui inférieure, créez une découpe centrée de <strong>16 mm</strong> de large pour permettre le branchement aisé du câble de recharge USB-C.</li>
+                            <li>Au dos du dossier, esquissez et extrudez la chape (ou tenon) arrière avec la dimension négociée <span class="interface-highlight">L_berceau (ex: 12,5 mm)</span> et percez l'alésage coaxial de liaison avec le bras.</li>
+                            <li>Ajoutez des congés de <strong>5 mm</strong> sur les angles supérieurs.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIECE 4 : L'AXE MOLETE (ELEVE B) -->
+            <div class="piece-box piece-box-b">
+                <div class="piece-header">
+                    <h3>
+                        <span class="piece-num-badge badge-pb">4</span>
+                        <span>Pièce 4 : L'Axe moleté de pivotement (Concepteur Élève B)</span>
+                    </h3>
+                    <span style="font-size: 0.85rem; font-weight: 700; color: var(--student-b);">Part Studio 2</span>
+                </div>
+
+                <div class="sketch-layout">
+                    <!-- Colonne Visuelle Gauche : Rendu 3D + Plan Coté -->
+                    <div style="display: flex; flex-direction: column; gap: 14px;">
+                        <!-- Rendu 3D Isométrique Pièce 4 -->
+                        <div class="piece-3d-card">
+                            <div class="piece-3d-card-header">
+                                <span>Aperçu 3D Isométrique (Objectif Visuel)</span>
+                                <span class="view-tag" style="background: var(--student-b-bg); color: var(--student-b); font-weight: 700;">PIÈCE 4 FINIE</span>
+                            </div>
+                            <img src="img/flexdesk_piece4_axe_3d.jpg" alt="Rendu 3D Pièce 4 : Axe moleté">
+                        </div>
+
+                        <!-- Mise en Plan Technique Cotée Référente -->
+                        <div class="plan-sheet-card">
+                            <div class="piece-3d-card-header">
+                                <span>Mise en Plan CAO Cotée (Vues Orthogonales & Isométrique)</span>
+                                <span class="view-tag" style="background: #e2e8f0; color: #1e293b; font-weight: 700;">NORME ISO CAO</span>
+                            </div>
+                            <img src="img/flexdesk_plan_3d_piece4_axe.jpg" alt="Plan technique 3D coté Pièce 4 : Axe moleté">
+                        </div>
+                    </div>
+
+                    <!-- Instructions de modélisation Axe -->
+                    <div class="steps-box">
+                        <h4>
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                            Démarche pas-à-pas Onshape (Élève B) :
+                        </h4>
+
+                        <!-- Tableau synthétique des cotes fonctionnelles -->
+                        <table class="dimension-badge-table">
+                            <thead>
+                                <tr>
+                                    <th>Élément géométrique</th>
+                                    <th>Cote nominale</th>
+                                    <th>Caractère de la cote</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Tête moletée de manœuvre</td>
+                                    <td><span class="dim-tag dim-normal">Ø 22 mm</span> / Longueur <span class="dim-tag dim-normal">12 mm</span></td>
+                                    <td>Moletage croisé ergonomique DIN 82</td>
+                                </tr>
+                                <tr>
+                                    <td>Épaulement d'arrêt axial</td>
+                                    <td><span class="dim-tag dim-normal">Ø 12 mm</span> / Longueur <span class="dim-tag dim-normal">2 mm</span></td>
+                                    <td>Face d'appui contre la chape</td>
+                                </tr>
+                                <tr>
+                                    <td>Corps cylindrique (\(D_{axe}\))</td>
+                                    <td><span class="dim-tag dim-interface">Ø 7,8 mm</span> / Longueur <span class="dim-tag dim-normal">42 mm</span></td>
+                                    <td>Cote négociée (Jeu pivot \(J_2 = 0,4\) mm)</td>
+                                </tr>
+                                <tr>
+                                    <td>Chanfrein d'entrée</td>
+                                    <td><span class="dim-tag dim-normal">1 × 45°</span></td>
+                                    <td>Guidage d'insertion au montage</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <ol>
+                            <li>Dans le même <em>Part Studio 2</em>, créez une nouvelle esquisse sur le plan <span class="key-action">Front</span>.</li>
+                            <li>Tracez une ligne d'axe horizontale en trait de construction passant par l'origine.</li>
+                            <li>Tracez le <strong>demi-profil fermé</strong> : tête moletée (rayon 11 mm / longueur 12 mm), collerette de guidage et tige cylindrique de longueur <strong>42 mm</strong>.</li>
+                            <li>Cotez le diamètre de la tige avec la valeur négociée <span class="interface-highlight">D_axe (ex: Ø 7,8 mm)</span>.</li>
+                            <li>Quittez l'esquisse et lancez la fonction <span class="key-action">Revolve</span> (Révolution 360° autour de l'axe).</li>
+                            <li>Ajoutez un chanfrein <span class="key-action">Chamfer</span> de <strong>1 mm × 45°</strong> à l'extrémité de la tige pour faciliter le centrage lors du montage.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Checkbox Étape 3 -->
+            <div class="check-step-item">
+                <input type="checkbox" id="check-step-3" onchange="updateProgress()">
+                <label for="check-step-3" class="check-step-label">
+                    <strong>Validation Étape 3 :</strong> Les 4 pièces volumiques sont entièrement modélisées (2 dans le Part Studio de l'Élève A, 2 dans celui de l'Élève B).
+                </label>
+            </div>
+        </div>
+
+        <!-- Étape 4 : L'Assemblage Commun -->
+        <div class="card" id="etape4">
+            <div class="card-header">
+                <div class="card-title">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                    Étape 4 : L'Assemblage Collaboratif 3D (Assembly) & Test Cinématique
+                </div>
+                <span class="card-time-tag">⏱ 20 minutes</span>
+            </div>
+
+            <p style="margin-bottom: 16px;">
+                C'est le moment crucial ! Les deux élèves basculent ensemble sur le même onglet <strong>Assembly 1</strong>. Grâce à la synchronisation cloud, chaque liaison mécanique posée par l'un est visible et testable instantanément par l'autre !
+            </p>
+
+            <div class="callout callout-info">
+                <div class="callout-icon">🤝</div>
+                <div>
+                    <h4>Protocole d'assemblage en binôme :</h4>
+                    <p>
+                        <strong>1. Insertion des pièces :</strong> Cliquez sur <strong>Insert</strong>. Dans la fenêtre, sélectionnez les pièces de <em>Part Studio 1</em> (Socle et Bras) ET les pièces de <em>Part Studio 2</em> (Berceau et Axe). Validez avec la coche verte.<br>
+                        <strong>2. Fixation du bâti (Indispensable !) :</strong> Cliquez avec le bouton droit sur le <strong>Socle</strong> dans la liste des pièces et sélectionnez <strong>Fix</strong> (une petite ancre apparaît). Le socle est désormais immobile dans l'espace.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Grille des liaisons Onshape -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; margin: 20px 0;">
+                <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 10px; padding: 18px; border-left: 4px solid #2563eb;">
+                    <h4 style="color: #1e3a8a; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                        <span>1. Liaison Pivot Bielle / Socle</span>
+                    </h4>
+                    <p style="font-size: 0.9rem; color: #334155; margin-bottom: 10px;">
+                        • Choisissez l'outil <span class="key-action">Revolute Mate</span>.<br>
+                        • Sélectionnez le connecteur central (<em>Mate Connector</em>) du trou inférieur du bras.<br>
+                        • Sélectionnez le connecteur correspondant au milieu des deux alésages de la chape du socle.<br>
+                        • Cochez <strong>Limits</strong> pour limiter le débattement angulaire entre <strong>0° et 60°</strong>.
+                    </p>
+                </div>
+
+                <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 10px; padding: 18px; border-left: 4px solid #059669;">
+                    <h4 style="color: #065f46; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                        <span>2. Mise en place de l'Axe Moleté</span>
+                    </h4>
+                    <p style="font-size: 0.9rem; color: #334155; margin-bottom: 10px;">
+                        • Choisissez l'outil <span class="key-action">Fastened Mate</span> (ou <em>Cylindrical Mate</em>).<br>
+                        • Sélectionnez la face d'appui de l'épaulement de l'axe.<br>
+                        • Sélectionnez la face extérieure de la chape du socle.<br>
+                        • Vérifiez que la tige traverse parfaitement le socle et le bras sans décalage.
+                    </p>
+                </div>
+
+                <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 10px; padding: 18px; border-left: 4px solid #d97706;">
+                    <h4 style="color: #92400e; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                        <span>3. Liaison Bras / Berceau</span>
+                    </h4>
+                    <p style="font-size: 0.9rem; color: #334155; margin-bottom: 10px;">
+                        • Choisissez l'outil <span class="key-action">Revolute Mate</span>.<br>
+                        • Reliez le trou supérieur du bras au tenon arrière du berceau.<br>
+                        • Réglez les limites d'inclinaison pour orienter l'écran du smartphone de façon ergonomique face à l'utilisateur.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Schéma de référence d'assemblage 3D -->
+            <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 18px; margin: 20px 0; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+                <div style="max-width: 260px; flex: 1; min-width: 200px;">
+                    <img src="img/flexdesk_assemblage_3d.jpg" alt="Assemblage 3D cible FlexDesk" style="width: 100%; border-radius: 8px; border: 1px solid #cbd5e1; box-shadow: 0 2px 6px rgba(0,0,0,0.08);">
+                </div>
+                <div style="flex: 2; min-width: 260px;">
+                    <h4 style="color: #1e3a8a; margin-bottom: 6px;">Autocontrôle visuel de l'assemblage :</h4>
+                    <p style="font-size: 0.9rem; color: #475569; margin-bottom: 8px;">
+                        Comparez votre résultat dans l'onglet <strong>Assembly 1</strong> avec le rendu 3D ci-contre :
+                    </p>
+                    <ul style="padding-left: 20px; font-size: 0.88rem; color: #334155;">
+                        <li>Le <strong>Socle</strong> est-il bien orienté avec son centre de gravité vers l'avant pour éviter le basculement ?</li>
+                        <li>Le <strong>Bras</strong> est-il centré dans la chape du socle avec un jeu latéral symétrique ?</li>
+                        <li>L'<strong>Axe moleté</strong> affleure-t-il correctement sans dépasser de façon disproportionnée ?</li>
+                        <li>Le <strong>Berceau</strong> bascule-t-il librement sans entrer en collision avec le bras ou le socle ?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Vérification des collisions & Animation -->
+            <div class="callout callout-success">
+                <div class="callout-icon">
+                    <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+                <div>
+                    <h4>Test cinématique et détection des interférences :</h4>
+                    <p>
+                        <strong>1. Animation du mécanisme :</strong> Dans l'arbre d'assemblage à gauche, faites un clic droit sur <em>Revolute 1</em> &gt; <strong>Animate</strong>. Cliquez sur Play : admirez l'inclinaison fluide de votre support articulé !<br>
+                        <strong>2. Détection d'interférences :</strong> Sélectionnez les 4 pièces, faites un clic droit &gt; <strong>Interference detection</strong>. Le résultat doit indiquer <em>No interference found</em>. Si une zone rouge apparaît, c'est que vos cotes négociées n'ont pas été scrupuleusement respectées !
+                    </p>
+                </div>
+            </div>
+
+            <!-- Checkbox Étape 4 -->
+            <div class="check-step-item">
+                <input type="checkbox" id="check-step-4" onchange="updateProgress()">
+                <label for="check-step-4" class="check-step-label">
+                    <strong>Validation Étape 4 :</strong> L'assemblage complet fonctionne en rotation sans interférence matérielle.
+                </label>
+            </div>
+        </div>
+
+        <!-- Étape 5 : Bilan & Évaluation -->
+        <div class="card" id="evaluation">
+            <div class="card-header">
+                <div class="card-title">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                    Étape 5 : Bilan, Rendu Classroom & Grille d'Évaluation (20 Points)
+                </div>
+                <span class="card-time-tag">⏱ 5 minutes</span>
+            </div>
+
+            <p style="margin-bottom: 14px;">
+                Chaque binôme dépose sur <strong>Google Classroom</strong> son lien de partage Onshape ainsi qu'une capture d'écran 3D de l'assemblage complet en vue isométrique montrant le bon fonctionnement cinématique.
+            </p>
+
+            <div class="eval-grid">
+                <div class="eval-card">
+                    <div class="eval-card-header">
+                        <span>1. Collaboration & Partage</span>
+                        <span style="color: var(--primary);">/ 4 pts</span>
+                    </div>
+                    <p>Partage effectif du document avec droits d'édition, synchronisation des deux élèves sans perte de données, travail simultané propre.</p>
+                </div>
+
+                <div class="eval-card">
+                    <div class="eval-card-header">
+                        <span>2. Contrat d'Interface & Tolérances</span>
+                        <span style="color: var(--primary);">/ 5 pts</span>
+                    </div>
+                    <p>Respect strict des cotes négociées, calcul correct des jeux fonctionnels pour éviter les blocages mécaniques ou le flottement.</p>
+                </div>
+
+                <div class="eval-card">
+                    <div class="eval-card-header">
+                        <span>3. Rigueur de Modélisation 3D</span>
+                        <span style="color: var(--primary);">/ 5 pts</span>
+                    </div>
+                    <p>Esquisses totalement contraintes (traits noirs), utilisation adaptée des fonctions (Extrude, Revolve, Hole, Fillet) pour les 4 pièces.</p>
+                </div>
+
+                <div class="eval-card">
+                    <div class="eval-card-header">
+                        <span>4. Assemblage & Cinématique</span>
+                        <span style="color: var(--primary);">/ 6 pts</span>
+                    </div>
+                    <p>Socle fixé (Fix), choix pertinent des connecteurs et des liaisons (Revolute Mate), amplitude angulaire réaliste, absence totale d'interférence.</p>
+                </div>
+            </div>
+
+            <div class="check-step-item" style="margin-top: 20px;">
+                <input type="checkbox" id="check-step-5" onchange="updateProgress()">
+                <label for="check-step-5" class="check-step-label">
+                    <strong>Validation Étape 5 :</strong> Captures d'écran insérées dans le compte-rendu Docs et lien Onshape soumis pour correction.
+                </label>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script interactif JS : Calcul des jeux, progression et sauvegarde locale -->
+    <script>
+        function calculateClearances() {
+            const lChape = parseFloat(document.getElementById('param-l-chape').value) || 0;
+            const eBras = parseFloat(document.getElementById('param-e-bras').value) || 0;
+            const jeu1 = (lChape - eBras).toFixed(2);
+            const dispJ1 = document.getElementById('disp-jeu-1');
+            const diagJ1 = document.getElementById('diag-jeu-1');
+            dispJ1.innerText = "J = " + jeu1 + " mm";
+
+            if (jeu1 < 0.2) {
+                dispJ1.className = "calculated-jeu jeu-danger";
+                diagJ1.innerHTML = "<span style='color: #b91c1c; font-weight: 700;'>❌ Risque de coincement / frottement sévère !</span>";
+            } else if (jeu1 > 1.0) {
+                dispJ1.className = "calculated-jeu jeu-warn";
+                diagJ1.innerHTML = "<span style='color: #b45309; font-weight: 700;'>⚠️ Jeu excessif (flottement latéral)</span>";
+            } else {
+                dispJ1.className = "calculated-jeu jeu-ok";
+                diagJ1.innerHTML = "<span style='color: #15803d; font-weight: 700;'>✅ Optimal (Rotation douce sans coincement)</span>";
+            }
+
+            const dTrou = parseFloat(document.getElementById('param-d-trou').value) || 0;
+            const dAxe = parseFloat(document.getElementById('param-d-axe').value) || 0;
+            const jeu2 = (dTrou - dAxe).toFixed(2);
+            const dispJ2 = document.getElementById('disp-jeu-2');
+            const diagJ2 = document.getElementById('diag-jeu-2');
+            dispJ2.innerText = "J = " + jeu2 + " mm";
+
+            if (jeu2 < 0.15) {
+                dispJ2.className = "calculated-jeu jeu-danger";
+                diagJ2.innerHTML = "<span style='color: #b91c1c; font-weight: 700;'>❌ Serrage excessif (l'axe ne rentrera pas)</span>";
+            } else if (jeu2 > 0.8) {
+                dispJ2.className = "calculated-jeu jeu-warn";
+                diagJ2.innerHTML = "<span style='color: #b45309; font-weight: 700;'>⚠️ Battement important</span>";
+            } else {
+                dispJ2.className = "calculated-jeu jeu-ok";
+                diagJ2.innerHTML = "<span style='color: #15803d; font-weight: 700;'>✅ Rotation fluide garantie</span>";
+            }
+
+            const lBerceau = parseFloat(document.getElementById('param-l-berceau').value) || 0;
+            const eTete = parseFloat(document.getElementById('param-e-tete').value) || 0;
+            const jeu3 = (lBerceau - eTete).toFixed(2);
+            const dispJ3 = document.getElementById('disp-jeu-3');
+            const diagJ3 = document.getElementById('diag-jeu-3');
+            dispJ3.innerText = "J = " + jeu3 + " mm";
+
+            if (jeu3 < 0.2) {
+                dispJ3.className = "calculated-jeu jeu-danger";
+                diagJ3.innerHTML = "<span style='color: #b91c1c; font-weight: 700;'>❌ Trop juste pour le montage</span>";
+            } else if (jeu3 > 1.2) {
+                dispJ3.className = "calculated-jeu jeu-warn";
+                diagJ3.innerHTML = "<span style='color: #b45309; font-weight: 700;'>⚠️ Trop de jeu</span>";
+            } else {
+                dispJ3.className = "calculated-jeu jeu-ok";
+                diagJ3.innerHTML = "<span style='color: #15803d; font-weight: 700;'>✅ Emboîtement parfait</span>";
+            }
+
+            localStorage.setItem('tp_onshape_params', JSON.stringify({
+                lChape, eBras, dTrou, dAxe, lBerceau, eTete
+            }));
+        }
+
+        function updateProgress() {
+            const checkboxes = [
+                document.getElementById('check-step-1'),
+                document.getElementById('check-step-2'),
+                document.getElementById('check-step-3'),
+                document.getElementById('check-step-4'),
+                document.getElementById('check-step-5')
+            ];
+
+            let checkedCount = 0;
+            const state = [];
+            checkboxes.forEach((cb, idx) => {
+                if (cb.checked) checkedCount++;
+                state.push(cb.checked);
+            });
+
+            const percent = Math.round((checkedCount / checkboxes.length) * 100);
+            document.getElementById('global-progress').style.width = percent + '%';
+            document.getElementById('progress-percent').innerText = percent + '%';
+
+            localStorage.setItem('tp_onshape_steps', JSON.stringify(state));
+        }
+
+        window.onload = function() {
+            try {
+                const savedParams = JSON.parse(localStorage.getItem('tp_onshape_params'));
+                if (savedParams) {
+                    if (savedParams.lChape) document.getElementById('param-l-chape').value = savedParams.lChape;
+                    if (savedParams.eBras) document.getElementById('param-e-bras').value = savedParams.eBras;
+                    if (savedParams.dTrou) document.getElementById('param-d-trou').value = savedParams.dTrou;
+                    if (savedParams.dAxe) document.getElementById('param-d-axe').value = savedParams.dAxe;
+                    if (savedParams.lBerceau) document.getElementById('param-l-berceau').value = savedParams.lBerceau;
+                    if (savedParams.eTete) document.getElementById('param-e-tete').value = savedParams.eTete;
+                }
+
+                const savedSteps = JSON.parse(localStorage.getItem('tp_onshape_steps'));
+                if (savedSteps && Array.isArray(savedSteps)) {
+                    ['check-step-1', 'check-step-2', 'check-step-3', 'check-step-4', 'check-step-5'].forEach((id, i) => {
+                        if (savedSteps[i]) document.getElementById(id).checked = true;
+                    });
+                }
+            } catch (e) {
+                console.error("Erreur de chargement du stockage local", e);
+            }
+            calculateClearances();
+            updateProgress();
+        };
+    </script>
+</body>
+</html>
